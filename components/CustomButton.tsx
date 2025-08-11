@@ -1,4 +1,4 @@
-import { Button } from 'react-native-button';
+import { Button } from 'react-native';
 
 type ICustomButton = {
     title: string;
