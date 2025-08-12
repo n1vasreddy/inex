@@ -67,7 +67,7 @@ export default function TabLayout() {
                 name="transactions"
                 options={{
                     title: 'Transactions',
-                    tabBarIcon: (color: string) => (
+                    tabBarIcon: ({ color }) => (
                         <FontAwesome6
                             name="money-bill-transfer"
                             size={24}
