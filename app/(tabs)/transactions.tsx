@@ -4,6 +4,9 @@ import { StyleSheet, FlatList, StatusBar } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { CustomButton } from '@/components/CustomButton';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { colors } from '@/constants/CommonColors';
+import { transactionTileStyles } from '@/constants/styles';
+import { formatCurrency, formatDate } from '@/utils/utils';
 
 export default function TransactionsScreen() {
     return (
@@ -11,7 +14,7 @@ export default function TransactionsScreen() {
             <SafeAreaView style={styles.container}>
                 <FlatList
                     data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} />}
+                    renderItem={({ item }) => <Item {...item} />}
                     keyExtractor={(item) => item.id}
                 />
             </SafeAreaView>
@@ -19,7 +22,7 @@ export default function TransactionsScreen() {
                 <CustomButton
                     title="Add Transaction"
                     onPress={() => {}}
-                    color="#F14A00"
+                    color={colors.redOrange}
                 />
             </SafeAreaView>
         </SafeAreaProvider>
@@ -34,12 +37,12 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: '#93DA97',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
+        padding: 8,
+        marginVertical: 4,
+        marginHorizontal: 8,
     },
     title: {
-        fontSize: 32,
+        fontSize: 18,
     },
 });
 
@@ -48,21 +51,59 @@ const DATA = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         title: 'First Item',
+        amount: 100,
+        trxType: 'Debit',
+        date: new Date(),
+        source: 'HDFC Bank',
+        category: ['Food', 'Grocery'],
+        note: 'Some note',
     },
     {
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
         title: 'Second Item',
+        amount: 20,
+        trxType: 'Debit',
+        date: new Date(),
+        source: 'HDFC Bank',
+        category: ['Food', 'Grocery'],
+        note: 'Some note',
     },
     {
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'Third Item',
+        amount: 5500,
+        trxType: 'Debit',
+        date: new Date(),
+        source: 'HDFC Bank',
+        category: ['Food', 'Grocery'],
+        note: 'Some note',
     },
 ];
 
-type ItemProps = { title: string };
+type ItemProps = {
+    amount: number;
+    trxType?: string;
+    date: Date;
+    source?: string;
+    category?: string[];
+    note: string;
+};
 
-const Item = ({ title }: ItemProps) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+const Item = ({
+    amount,
+    // trxType,
+    date,
+    // source,
+    // category,
+    note
+}: ItemProps) => (
+    <View style={transactionTileStyles.container}>
+        <View style={transactionTileStyles.innerContainer}>
+            <Text style={styles.note}>{note}</Text>
+            <Text style={styles.amount}>{formatCurrency(amount)}</Text>
+        </View>
+        <View style={transactionTileStyles.innerContainer}>
+            <Text style={styles.dateTime}>{formatDate(date)}</Text>
+        </View>
     </View>
 );
