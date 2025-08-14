@@ -1,31 +1,53 @@
-import { StyleSheet, FlatList, StatusBar } from 'react-native';
-
-// import EditScreenInfo from '@/components/EditScreenInfo';
+import { StyleSheet, FlatList, StatusBar, Pressable } from 'react-native';
+import { Link } from 'expo-router';
 import { Text, View } from '@/components/Themed';
-import { CustomButton } from '@/components/CustomButton';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { colors } from '@/constants/CommonColors';
+// import { CustomButton } from '@/components/CustomButton';
+// import { colors } from '@/constants/CommonColors';
 import { transactionTileStyles } from '@/constants/styles';
 import { formatCurrency, formatDate } from '@/utils/utils';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Colors from '@/constants/Colors';
+import { useColorScheme } from '@/components/useColorScheme';
 
 export default function TransactionsScreen() {
+    const colorScheme = useColorScheme();
+
     return (
-        <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
-                <FlatList
-                    data={DATA}
-                    renderItem={({ item }) => <Item {...item} />}
-                    keyExtractor={(item) => item.id}
-                />
-            </SafeAreaView>
-            <SafeAreaView style={styles.container}>
-                <CustomButton
+        <>
+            <SafeAreaProvider>
+                <SafeAreaView style={styles.container}>
+                    <FlatList
+                        data={DATA}
+                        renderItem={({ item }) => <Item {...item} />}
+                        keyExtractor={(item) => item.id}
+                    />
+                </SafeAreaView>
+            </SafeAreaProvider>
+
+            <View style={styles.container}>
+                {/* <CustomButton
                     title="Add Transaction"
                     onPress={() => {}}
                     color={colors.redOrange}
-                />
-            </SafeAreaView>
-        </SafeAreaProvider>
+                /> */}
+                <Link href="/addTransaction" asChild>
+                    <Pressable>
+                        {({ pressed = false }: { pressed?: boolean }) => (
+                            <Ionicons
+                                name="add-circle"
+                                size={45}
+                                color={Colors[colorScheme ?? 'light'].text}
+                                style={{
+                                    marginRight: 15,
+                                    opacity: pressed ? 0.5 : 1,
+                                }}
+                            />
+                        )}
+                    </Pressable>
+                </Link>
+            </View>
+        </>
     );
 }
 
@@ -34,6 +56,10 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
         alignItems: 'center',
+    },
+    container1: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
     },
     item: {
         backgroundColor: '#93DA97',
@@ -89,14 +115,7 @@ type ItemProps = {
     note: string;
 };
 
-const Item = ({
-    amount,
-    // trxType,
-    date,
-    // source,
-    // category,
-    note
-}: ItemProps) => (
+const Item = ({ amount, date, note }: ItemProps) => (
     <View style={transactionTileStyles.container}>
         <View style={transactionTileStyles.innerContainer}>
             <Text style={styles.note}>{note}</Text>
