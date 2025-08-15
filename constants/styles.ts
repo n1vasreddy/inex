@@ -1,8 +1,6 @@
+import { StyleSheet, StatusBar } from 'react-native';
 
-// Resuable styles
-
-// Transaction record tile
-export const transactionTileStyles = {
+export const transactionTileStyles = StyleSheet.create({
     container: {
         borderRadius: 10,
         marginVertical: 10,
@@ -28,4 +26,25 @@ export const transactionTileStyles = {
         fontSize: 12,
         marginTop: 5,
     }
-}
+})
+
+export const transactionSectionStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+        alignItems: 'center',
+    },
+    container1: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+    },
+    item: {
+        backgroundColor: '#93DA97',
+        padding: 8,
+        marginVertical: 4,
+        marginHorizontal: 8,
+    },
+    title: {
+        fontSize: 18,
+    },
+});
