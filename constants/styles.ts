@@ -13,8 +13,7 @@ export const transactionTileStyles = StyleSheet.create({
     },
     note: {
         color: '#666',
-        fontSize: 12,
-        marginTop: 5,
+        fontSize: 12
     },
     amount: {
         color: '#000',

@@ -3,8 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Link, Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
-
-import Colors from '@/constants/colors';
+import colors from '@/constants/colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
@@ -22,7 +21,7 @@ export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+                tabBarActiveTintColor: colors[colorScheme ?? 'light'].tint,
                 // Disable the static render of the header on web
                 // to prevent a hydration error in React Navigation v6.
                 headerShown: useClientOnlyValue(false, true),
@@ -43,7 +42,7 @@ export default function TabLayout() {
                                         name="info-circle"
                                         size={25}
                                         color={
-                                            Colors[colorScheme ?? 'light'].text
+                                            colors[colorScheme ?? 'light'].text
                                         }
                                         style={{
                                             marginRight: 15,
@@ -57,12 +56,14 @@ export default function TabLayout() {
                 }}
             />
             {/* <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      /> */}
+                name="two"
+                options={{
+                    title: 'Tab Two',
+                    tabBarIcon: ({ color }) => (
+                        <TabBarIcon name="code" color={color} />
+                    ),
+                }}
+            /> */}
             <Tabs.Screen
                 name="transactions"
                 options={{
