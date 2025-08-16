@@ -1,7 +1,7 @@
 const tintColorLight = '#05445E';
 const tintColorDark = '#D4F1F4';
 
-export default {
+const colors = {
   light: {
     text: '#4C5270',
     background: '#B4F8C8',
@@ -16,4 +16,6 @@ export default {
     tabIconDefault: '#75E6DA',
     tabIconSelected: tintColorDark,
   },
-};
+} as any;
+
+export default colors;
