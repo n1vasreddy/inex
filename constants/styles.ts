@@ -13,7 +13,7 @@ export const transactionTileStyles = StyleSheet.create({
     },
     note: {
         color: '#666',
-        fontSize: 12
+        fontSize: 12,
     },
     amount: {
         color: '#000',
@@ -24,8 +24,8 @@ export const transactionTileStyles = StyleSheet.create({
         color: '#999',
         fontSize: 12,
         marginTop: 5,
-    }
-})
+    },
+});
 
 export const transactionSectionStyles = StyleSheet.create({
     container: {
@@ -45,5 +45,38 @@ export const transactionSectionStyles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
+    },
+});
+
+export const addTransactionStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 4,
+        marginHorizontal: 4,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%',
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 10,
+        width: 200,
+    },
+    textArea: {
+        height: 100,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 10,
+        width: 200,
     },
 });
