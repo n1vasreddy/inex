@@ -64,12 +64,19 @@ function RootLayoutNav() {
                     name="modal"
                     options={{ presentation: 'modal' }}
                 />
+                <Stack.Screen
+                    name="transactionEntry"
+                    options={{
+                        presentation: 'modal', // This makes it appear as a modal
+                        title: 'Transaction Entry', // Set your modal title here
+                    }}
+                />
             </Stack>
             <AnimatedFAB
                 icon={'plus'}
                 label={'Label'}
                 extended={false}
-                onPress={() => router.navigate('/addTransaction')}
+                onPress={() => router.navigate('/transactionEntry')}
                 visible={true}
                 animateFrom={'right'}
                 iconMode={'static'}

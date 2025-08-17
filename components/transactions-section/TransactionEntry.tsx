@@ -4,9 +4,9 @@ import { Platform, TextInput, Button } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
-import { addTransactionStyles } from '@/constants/styles';
+import { transactionEntryStyles } from '@/constants/styles';
 
-export default function AddTransaction() {
+export default function TransactionEntry() {
     const [amount, setAmount] = useState(0);
     const [transactionType, setTransactionType] = useState('Debit');
     const [date, setDate] = useState(new Date());
@@ -47,16 +47,16 @@ export default function AddTransaction() {
     };
 
     return (
-        <View style={addTransactionStyles.container}>
-            <Text style={addTransactionStyles.title}>Add a transaction</Text>
+        <View style={transactionEntryStyles.container}>
+            <Text style={transactionEntryStyles.title}>Add a transaction</Text>
             <View
-                style={addTransactionStyles.separator}
+                style={transactionEntryStyles.separator}
                 lightColor="#aaa"
                 darkColor="rgba(255,255,255,0.1)"
             />
 
             <TextInput
-                style={addTransactionStyles.input}
+                style={transactionEntryStyles.input}
                 placeholder="Amount"
                 keyboardType="numeric"
                 value={amount.toString()}
@@ -104,7 +104,7 @@ export default function AddTransaction() {
             </Picker> */}
 
             <TextInput
-                style={addTransactionStyles.textArea}
+                style={transactionEntryStyles.textArea}
                 placeholder="Note"
                 multiline={true}
                 numberOfLines={4}

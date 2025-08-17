@@ -48,7 +48,7 @@ export const transactionSectionStyles = StyleSheet.create({
     },
 });
 
-export const addTransactionStyles = StyleSheet.create({
+export const transactionEntryStyles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
