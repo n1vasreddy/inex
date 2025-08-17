@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -9,6 +9,7 @@ const {
     DefaultTheme,
     ThemeProvider,
 } = require('@react-navigation/native');
+import { AnimatedFAB } from 'react-native-paper';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -51,6 +52,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
     const colorScheme = useColorScheme();
+    const router = useRouter();
 
     return (
         <ThemeProvider
@@ -63,6 +65,20 @@ function RootLayoutNav() {
                     options={{ presentation: 'modal' }}
                 />
             </Stack>
+            <AnimatedFAB
+                icon={'plus'}
+                label={'Label'}
+                extended={false}
+                onPress={() => router.navigate('/addTransaction')}
+                visible={true}
+                animateFrom={'right'}
+                iconMode={'static'}
+                style={{
+                    bottom: 86,
+                    right: 16,
+                    position: 'absolute',
+                }}
+            />
         </ThemeProvider>
     );
 }
