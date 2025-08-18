@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, TextInput, Button } from 'react-native';
+import { Platform, Button } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import { TextInput } from 'react-native-paper';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
 import { transactionEntryStyles } from '@/constants/styles';
+import TextInputField from '../text-input-field/TextInputField';
+import { labels, options } from '@/constants/constants';
 
 export default function TransactionEntry() {
-    const [amount, setAmount] = useState(0);
-    const [transactionType, setTransactionType] = useState('Debit');
+    const [amount, setAmount] = useState('');
+    const [transactionType, setTransactionType] = useState<string | undefined>(
+        'Debit',
+    );
     const [date, setDate] = useState(new Date());
     const [source, setSource] = useState('HDFC Bank');
     const [category, setCategory] = useState('Food');
@@ -48,19 +53,11 @@ export default function TransactionEntry() {
 
     return (
         <View style={transactionEntryStyles.container}>
-            <Text style={transactionEntryStyles.title}>Add a transaction</Text>
-            <View
-                style={transactionEntryStyles.separator}
-                lightColor="#aaa"
-                darkColor="rgba(255,255,255,0.1)"
-            />
-
-            <TextInput
+            <TextInputField
                 style={transactionEntryStyles.input}
-                placeholder="Amount"
-                keyboardType="numeric"
-                value={amount.toString()}
-                onChangeText={(text) => setAmount(parseInt(text, 10))}
+                label={labels.amount}
+                value={amount}
+                onChangeText={setAmount}
             />
 
             <DropdownField
@@ -68,22 +65,12 @@ export default function TransactionEntry() {
                 placeholder="Transaction Type"
                 value={transactionType}
                 onSelect={(itemValue) => setTransactionType(itemValue)}
-                options={[
-                    { label: 'Debit', value: 'debit' },
-                    { label: 'Credit', value: 'credit' },
-                ]}
+                options={options.transactionType}
             />
 
-            {/* <Picker
-                ref={pickerRef}
-                selectedValue={transactionType}
-                onValueChange={(itemValue) => setTransactionType(itemValue)}
-            >
-                <Picker.Item label="Debit" value="Debit" />
-                <Picker.Item label="Credit" value="Credit" />
-            </Picker> */}
-
-            <Text>selected: {date.toLocaleString()}</Text>
+            <Text style={{ borderColor: 'red', borderWidth: 1 }}>
+                selected: {date.toLocaleString()}
+            </Text>
             <Button onPress={showDatepicker} title="Show date picker!" />
             <Button onPress={showTimepicker} title="Show time picker!" />
 
