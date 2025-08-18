@@ -50,27 +50,30 @@ export const transactionSectionStyles = StyleSheet.create({
 
 export const transactionEntryStyles = StyleSheet.create({
     container: {
+        paddingTop: StatusBar.currentHeight || 0,
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical: 4,
-        marginHorizontal: 4,
+        justifyContent: 'flex-start',
+        // marginVertical: 4,
+        // marginHorizontal: 4,
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
+    // title: {
+    //     fontSize: 20,
+    //     fontWeight: 'bold',
+    //     marginTop: 8,
+    //     marginBottom: -12,
+    // },
     separator: {
         marginVertical: 30,
         height: 1,
         width: '80%',
     },
     input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        width: 200,
+        // height: 40,
+        // borderColor: 'gray',
+        // borderWidth: 1,
+        marginBottom: 20,
+        width: 280,
     },
     textArea: {
         height: 100,
