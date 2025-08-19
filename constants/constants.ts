@@ -5,6 +5,7 @@ export const labels = {
     source: 'Source',
     category: 'Category',
     note: 'Note',
+    submit: 'Submit',
 };
 
 export const options = {
