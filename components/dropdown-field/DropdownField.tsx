@@ -1,16 +1,21 @@
 import React from 'react';
 import { Dropdown } from 'react-native-paper-dropdown';
+import { StyleProp, View } from 'react-native';
 
-interface IDropdownPicker extends React.ComponentProps<typeof Dropdown> {}
+interface IDropdownPicker extends React.ComponentProps<typeof Dropdown> {
+    style?: StyleProp<any>;
+}
 
 export const DropdownField = (props: IDropdownPicker) => {
     return (
-        <Dropdown
-            {...props}
-            mode="outlined"
-            statusBarHeight={-110}
-            hideMenuHeader={true}
-        />
+        <View style={props.style}>
+            <Dropdown
+                {...props}
+                mode="outlined"
+                statusBarHeight={0}
+                hideMenuHeader={true}
+            />
+        </View>
     );
 };
 
