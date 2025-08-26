@@ -10,12 +10,11 @@ import CustomButton from '@/components/custom-button/CustomButton';
 import { Provider as PaperProvider } from 'react-native-paper';
 import DatePickerField from '@/components/date-picker-field/DatePickerField';
 import { TextInput } from 'react-native-paper';
+import ToggleInput from '@/components/toggle-input/ToggleInput';
 
 export default function TransactionEntry() {
     const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState<string | undefined>(
-        'debit',
-    );
+    const [transactionType, setTransactionType] = useState<string>('Debit');
     const [date, setDate] = useState(new Date());
     const [source, setSource] = useState<string | undefined>('hdfc3');
     const [category, setCategory] = useState<string | undefined>('');
@@ -41,14 +40,6 @@ export default function TransactionEntry() {
                     value={amount}
                     onChangeText={setAmount}
                     left={<TextInput.Icon icon="currency-inr" />}
-                />
-
-                <DropdownField
-                    label="Transaction Type"
-                    value={transactionType}
-                    onSelect={setTransactionType}
-                    options={options.transactionType}
-                    style={transactionEntryStyles.commonStyles}
                 />
 
                 <DropdownField
@@ -79,6 +70,14 @@ export default function TransactionEntry() {
                     label={labels.note}
                     value={note}
                     onChangeText={setNote}
+                />
+
+                <ToggleInput
+                    value={transactionType}
+                    onValueChange={setTransactionType}
+                    options={options.transactionType}
+                    style={transactionEntryStyles.commonStyles}
+                    trackColor={options.transactionTypeTrackColor}
                 />
 
                 <CustomButton
