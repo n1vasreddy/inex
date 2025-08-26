@@ -1,45 +1,126 @@
-import React from 'react';
-import { Button } from 'react-native-paper';
-import { DatePickerModal } from 'react-native-paper-dates';
+import { formatDate } from '@/utils/utils';
+import React, { useState } from 'react';
+import { View, StyleSheet, StyleProp, Pressable } from 'react-native';
+import { Text } from 'react-native-paper';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 
 interface IDatePickerFieldProps {
+    label: string;
+    date: Date;
     onDateChange: (date: any) => void;
-    selectedDate: string | any;
+    style?: StyleProp<any>;
 }
 
 export default function DatePickerField(props: IDatePickerFieldProps) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [visible, setVisible] = useState(false);
 
-    const onDismissSingle = React.useCallback(() => {
-        setOpen(false);
-    }, [setOpen]);
-
-    const onConfirmSingle = React.useCallback(
+    // Set date
+    const onDateConfirmSingle = React.useCallback(
         (params) => {
             setOpen(false);
             props?.onDateChange(params.date);
+            setVisible(true);
         },
         [setOpen, props?.onDateChange],
     );
 
+    // Dismiss date popup
+    const onDateDismissSingle = React.useCallback(() => {
+        setOpen(false);
+    }, [setOpen]);
+
+    // Set time
+    const onTimeConfirm = React.useCallback(
+        ({ hours, minutes }) => {
+            setVisible(false);
+            console.log({ hours, minutes });
+        },
+        [setVisible],
+    );
+
+    // Dismiss time popup
+    const onTimeDismiss = React.useCallback(() => {
+        setVisible(false);
+    }, [setVisible]);
+
     return (
         <>
-            <Button
-                onPress={() => setOpen(true)}
-                uppercase={false}
-                mode="outlined"
-                style={{ marginTop: 18 }}
-            >
-                Pick single date
-            </Button>
+            <View style={[styles.container, props?.style]}>
+                <View
+                    style={[
+                        styles.labelContainer,
+                        { width: props.label.length * 6.5 },
+                    ]}
+                >
+                    <Text style={styles.label}>{props.label}</Text>
+                    <View style={styles.topHalf} />
+                    <View style={styles.bottomHalf} />
+                </View>
+                <Text>{formatDate(props.date)}</Text>
+                <Pressable onPress={() => setOpen(true)} style={styles.icon}>
+                    <EvilIcons name="calendar" size={34} color="black" />
+                </Pressable>
+            </View>
             <DatePickerModal
                 locale="en"
                 mode="single"
                 visible={open}
-                onDismiss={onDismissSingle}
-                date={props.selectedDate}
-                onConfirm={onConfirmSingle}
+                onDismiss={onDateDismissSingle}
+                date={props.date}
+                onConfirm={onDateConfirmSingle}
+                label={props.label}
+            />
+            <TimePickerModal
+                visible={visible}
+                onDismiss={onTimeDismiss}
+                onConfirm={onTimeConfirm}
+                hours={props.date.getHours()}
+                minutes={props.date.getMinutes()}
+                label={props.label}
             />
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#777',
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        height: 50,
+    },
+    labelContainer: {
+        position: 'absolute',
+        top: -11,
+        left: 9,
+        height: 20,
+    },
+    label: {
+        fontSize: 12,
+        zIndex: 1,
+        position: 'absolute',
+        left: 4,
+        color: '#444',
+    },
+    topHalf: {
+        height: '30%',
+        width: '100%',
+        flex: 1,
+    },
+    bottomHalf: {
+        height: '70%',
+        width: '100%',
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    icon: {
+        height: 34,
+    },
+});
