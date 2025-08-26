@@ -1,7 +1,7 @@
 export const labels = {
     amount: 'Amount',
     transactionType: 'Transaction Type',
-    date: 'Date',
+    transactionDate: 'Transaction Date & Time',
     source: 'Source',
     category: 'Category',
     note: 'Note',

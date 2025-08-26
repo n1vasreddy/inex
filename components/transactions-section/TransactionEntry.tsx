@@ -67,7 +67,12 @@ export default function TransactionEntry() {
                     style={transactionEntryStyles.commonStyles}
                 />
 
-                <DatePickerField selectedDate={date} onDateChange={setDate} />
+                <DatePickerField
+                    date={date}
+                    onDateChange={setDate}
+                    label={labels.transactionDate}
+                    style={transactionEntryStyles.commonStyles}
+                />
 
                 <TextInputField
                     style={transactionEntryStyles.commonStyles}
