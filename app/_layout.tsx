@@ -10,6 +10,8 @@ const {
     ThemeProvider,
 } = require('@react-navigation/native');
 import { AnimatedFAB } from 'react-native-paper';
+import { Provider } from 'react-redux';
+import store from '@/store/store';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -55,37 +57,42 @@ function RootLayoutNav() {
     const router = useRouter();
 
     return (
-        <ThemeProvider
-            value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-        >
-            <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen
-                    name="modal"
-                    options={{ presentation: 'modal' }}
-                />
-                <Stack.Screen
-                    name="transactionEntry"
-                    options={{
-                        presentation: 'modal', // This makes it appear as a modal
-                        title: 'Transaction Entry', // Set your modal title here
+        <Provider store={store}>
+            <ThemeProvider
+                value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+            >
+                <Stack>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="modal"
+                        options={{ presentation: 'modal' }}
+                    />
+                    <Stack.Screen
+                        name="transactionEntry"
+                        options={{
+                            presentation: 'modal', // This makes it appear as a modal
+                            title: 'Transaction Entry', // Set your modal title here
+                        }}
+                    />
+                </Stack>
+                <AnimatedFAB
+                    icon={'plus'}
+                    label={'Label'}
+                    extended={false}
+                    onPress={() => router.navigate('/transactionEntry')}
+                    visible={true}
+                    animateFrom={'right'}
+                    iconMode={'static'}
+                    style={{
+                        bottom: 86,
+                        right: 16,
+                        position: 'absolute',
                     }}
                 />
-            </Stack>
-            <AnimatedFAB
-                icon={'plus'}
-                label={'Label'}
-                extended={false}
-                onPress={() => router.navigate('/transactionEntry')}
-                visible={true}
-                animateFrom={'right'}
-                iconMode={'static'}
-                style={{
-                    bottom: 86,
-                    right: 16,
-                    position: 'absolute',
-                }}
-            />
-        </ThemeProvider>
+            </ThemeProvider>
+        </Provider>
     );
 }
