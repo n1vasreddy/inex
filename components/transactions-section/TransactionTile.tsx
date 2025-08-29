@@ -5,7 +5,7 @@ import { formatCurrency, formatDate } from '@/utils/utils';
 export type ITransactionTileProps = {
     amount: number;
     trxType?: string;
-    date: Date;
+    date: string;
     source?: string;
     category?: string[];
     note: string;
@@ -25,7 +25,7 @@ export const TransactionTile = ({
         </View>
         <View style={transactionTileStyles.innerContainer}>
             <Text style={transactionTileStyles.dateTime}>
-                {formatDate(date)}
+                {formatDate(new Date(date))}
             </Text>
         </View>
     </View>
