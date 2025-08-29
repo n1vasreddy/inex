@@ -11,8 +11,11 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import DatePickerField from '@/components/date-picker-field/DatePickerField';
 import { TextInput } from 'react-native-paper';
 import ToggleInput from '@/components/toggle-input/ToggleInput';
+import { useDispatch } from 'react-redux';
+import { transactionEntry } from '@/store/transactions';
 
 export default function TransactionEntry() {
+    const dispatch = useDispatch();
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<string>('Debit');
     const [date, setDate] = useState(new Date());
@@ -21,14 +24,15 @@ export default function TransactionEntry() {
     const [note, setNote] = useState('');
 
     const handleSubmit = () => {
-        console.log({
-            amount,
-            transactionType,
-            date,
+        const payload = {
+            amount: Number(amount),
+            trxType: transactionType,
+            date: date.toJSON(),
             source,
-            category,
+            category: [category],
             note,
-        });
+        };
+        dispatch(transactionEntry(payload));
     };
 
     return (
