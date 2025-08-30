@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TransactionType } from '@/constants/constants';
 
 interface ITransactionInfo {
-    // id: string;
+    id: string;
     amount: number;
-    trxType: TransactionType;
+    trxType: string | TransactionType;
     date: string;
     paymentMethod: string | undefined;
     category: (string | undefined)[];

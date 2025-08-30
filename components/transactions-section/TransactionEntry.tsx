@@ -13,11 +13,13 @@ import { TextInput } from 'react-native-paper';
 import ToggleInput from '@/components/toggle-input/ToggleInput';
 import { useDispatch } from 'react-redux';
 import { transactionEntry } from '@/store/transactions';
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
 
 export default function TransactionEntry() {
     const dispatch = useDispatch();
     const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState<TransactionType>(
+    const [transactionType, setTransactionType] = useState<string>(
         TransactionType.Debit,
     );
     const [date, setDate] = useState(new Date());
@@ -29,6 +31,7 @@ export default function TransactionEntry() {
 
     const handleSubmit = () => {
         const payload = {
+            id: uuid(),
             amount: Number(amount),
             trxType: transactionType,
             date: date.toJSON(),
