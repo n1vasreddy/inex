@@ -5,7 +5,7 @@ import { View } from '@/components/Themed';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
 import { transactionEntryStyles } from '@/constants/styles';
 import TextInputField from '../text-input-field/TextInputField';
-import { labels, options } from '@/constants/constants';
+import { labels, options, TransactionType } from '@/constants/constants';
 import CustomButton from '@/components/custom-button/CustomButton';
 import { Provider as PaperProvider } from 'react-native-paper';
 import DatePickerField from '@/components/date-picker-field/DatePickerField';
@@ -17,9 +17,13 @@ import { transactionEntry } from '@/store/transactions';
 export default function TransactionEntry() {
     const dispatch = useDispatch();
     const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState<string>('Debit');
+    const [transactionType, setTransactionType] = useState<TransactionType>(
+        TransactionType.Debit,
+    );
     const [date, setDate] = useState(new Date());
-    const [paymentMethod, setPaymentMethod] = useState<string | undefined>('hdfc3');
+    const [paymentMethod, setPaymentMethod] = useState<string | undefined>(
+        'hdfc3',
+    );
     const [category, setCategory] = useState<string | undefined>('');
     const [note, setNote] = useState('');
 
@@ -47,7 +51,7 @@ export default function TransactionEntry() {
                 />
 
                 <DropdownField
-                    label="Source"
+                    label={labels.paymentMethod}
                     value={paymentMethod}
                     onSelect={setPaymentMethod}
                     options={options.paymentMethods}
@@ -55,7 +59,7 @@ export default function TransactionEntry() {
                 />
 
                 <DropdownField
-                    label="Category"
+                    label={labels.category}
                     value={category}
                     onSelect={setCategory}
                     options={options.category}

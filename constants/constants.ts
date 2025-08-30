@@ -2,7 +2,7 @@ export const labels = {
     amount: 'Amount',
     transactionType: 'Transaction Type',
     transactionDate: 'Transaction Date & Time',
-    source: 'Source',
+    paymentMethod: 'Payment Method',
     category: 'Category',
     note: 'Note',
     submit: 'Submit',
@@ -27,3 +27,8 @@ export const options = {
         { label: 'SBI Bank', value: 'sbi' },
     ],
 };
+
+export enum TransactionType {
+    Debit = 'Debit',
+    Credit = 'Credit',
+}

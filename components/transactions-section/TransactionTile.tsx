@@ -1,10 +1,11 @@
 import { Text, View } from '@/components/Themed';
 import { transactionTileStyles } from '@/constants/styles';
 import { formatCurrency, formatDate } from '@/utils/utils';
+import { TransactionType } from '@/constants/constants';
 
 export type ITransactionTileProps = {
     amount: number;
-    trxType?: string;
+    trxType?: TransactionType;
     date: string;
     paymentMethod?: string;
     category?: string[];
