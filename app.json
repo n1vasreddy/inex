@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "inex",
+    "name": "Inex",
     "slug": "inex",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.app.inex"
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +34,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6bfe25b4-eecc-4eb3-ada8-f6495d3f8e0f"
+      }
     }
   }
 }
