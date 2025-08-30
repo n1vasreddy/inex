@@ -5,7 +5,7 @@ interface ITransactionInfo {
     amount: number;
     trxType: string;
     date: string;
-    source: string | undefined;
+    paymentMethod: string | undefined;
     category: (string | undefined)[];
     note: string;
 }

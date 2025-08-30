@@ -6,7 +6,7 @@ export type ITransactionTileProps = {
     amount: number;
     trxType?: string;
     date: string;
-    source?: string;
+    paymentMethod?: string;
     category?: string[];
     note: string;
 };

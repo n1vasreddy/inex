@@ -19,7 +19,7 @@ export default function TransactionEntry() {
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<string>('Debit');
     const [date, setDate] = useState(new Date());
-    const [source, setSource] = useState<string | undefined>('hdfc3');
+    const [paymentMethod, setPaymentMethod] = useState<string | undefined>('hdfc3');
     const [category, setCategory] = useState<string | undefined>('');
     const [note, setNote] = useState('');
 
@@ -28,7 +28,7 @@ export default function TransactionEntry() {
             amount: Number(amount),
             trxType: transactionType,
             date: date.toJSON(),
-            source,
+            paymentMethod,
             category: [category],
             note,
         };
@@ -48,9 +48,9 @@ export default function TransactionEntry() {
 
                 <DropdownField
                     label="Source"
-                    value={source}
-                    onSelect={setSource}
-                    options={options.source}
+                    value={paymentMethod}
+                    onSelect={setPaymentMethod}
+                    options={options.paymentMethods}
                     style={transactionEntryStyles.commonStyles}
                 />
 

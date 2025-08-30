@@ -20,7 +20,7 @@ export const options = {
         { label: 'Bike', value: 'bike' },
         { label: 'Fuel', value: 'fuel' },
     ],
-    source: [
+    paymentMethods: [
         { label: 'HDFC Bank Debit Card', value: 'hdfc1' },
         { label: 'HDFC Moneyback Plus Credit Card', value: 'hdfc2' },
         { label: 'HDFC Bank UPI Credit Card', value: 'hdfc3' },
