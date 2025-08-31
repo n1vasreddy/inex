@@ -33,3 +33,24 @@ export async function setupDatabase() {
         return [];
     }
 }
+
+export const addTransaction = async (trx: any) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(
+            'INSERT INTO transactions (id, amount, trxType, date, paymentMethod, category, note) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [
+                trx?.id,
+                trx?.amount,
+                trx?.trxType,
+                trx?.date,
+                trx?.paymentMethod,
+                trx?.category.join(','),
+                trx?.note,
+            ],
+        );
+    } catch (error) {
+        console.error('Error adding transaction:', error);
+        return [];
+    }
+};
