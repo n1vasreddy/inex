@@ -25,7 +25,6 @@ export const transactionsSlice = createSlice({
     initialState: { data: [] },
     reducers: {
         transactionEntry: (state: ITransactionState, action: IAction) => {
-            console.log(action);
             state.data = [...state.data, action.payload];
         },
     },
