@@ -16,7 +16,7 @@ export default function TransactionsSection() {
                         renderItem={(props: {
                             item: ITransactionTileProps;
                         }) => <TransactionTile {...props.item} />}
-                        keyExtractor={(item: any) => item.amount}
+                        keyExtractor={(item: any) => item.id}
                     />
                 </SafeAreaView>
             </SafeAreaProvider>
