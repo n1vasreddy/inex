@@ -18,21 +18,31 @@ export async function setupDatabase() {
     try {
         const db = await openDatabase();
         await db.execAsync(`
-    CREATE TABLE IF NOT EXISTS transactions (
-        id TEXT PRIMARY KEY NOT NULL,
-        amount REAL NOT NULL DEFAULT 0,
-        trxType TEXT NOT NULL,
-        date string NOT NULL,
-        paymentMethod TEXT NOT NULL,
-        category TEXT,
-        note TEXT
-    );
-    `);
+            CREATE TABLE IF NOT EXISTS transactions (
+            id TEXT PRIMARY KEY NOT NULL,
+            amount REAL NOT NULL DEFAULT 0,
+            trxType TEXT NOT NULL,
+            date string NOT NULL,
+            paymentMethod TEXT NOT NULL,
+            category TEXT,
+            note TEXT
+            );
+        `);
     } catch (error) {
         console.error('Error setting up database:', error);
         return [];
     }
 }
+
+export const getTransactions = async () => {
+    try {
+        const db = await openDatabase();
+        return await db.getAllAsync('SELECT * FROM transactions');
+    } catch (error) {
+        console.error('Error fetching transactions:', error);
+        return [];
+    }
+};
 
 export const addTransaction = async (trx: any) => {
     try {
