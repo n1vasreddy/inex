@@ -12,6 +12,7 @@ const {
 import { AnimatedFAB } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
+import { setupDatabase } from '@/db/database';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
@@ -33,6 +34,10 @@ export default function RootLayout() {
         SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
         ...FontAwesome.font,
     });
+
+    useEffect(() => {
+        setupDatabase();
+    }, []);
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
     useEffect(() => {
