@@ -9,10 +9,10 @@ export const labels = {
 };
 
 export const options = {
-    transactionType: [
-        { label: 'Debit', value: false, color: '#f51720' },
-        { label: 'Credit', value: true, color: '#18a558' },
-    ],
+    transactionType: {
+        true: { label: 'Credit', value: true, color: '#18a558' },
+        false: { label: 'Debit', value: false, color: '#f51720' },
+    },
     transactionTypeTrackColor: { true: '#46b779', false: '#f7454d' },
     category: [
         { label: 'Food', value: 'food' },
