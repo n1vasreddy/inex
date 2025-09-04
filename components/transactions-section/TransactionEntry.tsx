@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { transactionEntry } from '@/store/transactions';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
+import useTransactions from '@/hooks/useTransactions';
 
 export default function TransactionEntry() {
     const dispatch = useDispatch();
@@ -28,8 +29,9 @@ export default function TransactionEntry() {
     );
     const [category, setCategory] = useState<string | undefined>('');
     const [note, setNote] = useState('');
+    const { add } = useTransactions();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const payload = {
             id: uuid(),
             amount: Number(amount),
@@ -39,6 +41,7 @@ export default function TransactionEntry() {
             category: [category],
             note,
         };
+        await add(payload);
         dispatch(transactionEntry(payload));
     };
 
