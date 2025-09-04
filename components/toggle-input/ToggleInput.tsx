@@ -2,46 +2,26 @@ import React, { ComponentProps } from 'react';
 import { View, StyleSheet, StyleProp } from 'react-native';
 import { Text, Switch } from 'react-native-paper';
 
-interface IToggleInput
-    extends Omit<ComponentProps<typeof Switch>, 'value' | 'onValueChange'> {
-    value: string;
-    onValueChange: (value: string) => void;
-    options: IOption[];
+interface IToggleInput extends ComponentProps<typeof Switch> {
+    label: string;
     style?: StyleProp<any>;
     trackColor: { true: string; false: string };
 }
 
-interface IOption {
-    label: string;
-    value: boolean;
-    color: string;
-}
-
 const ToggleInput = (props: IToggleInput) => {
-    const targetOption: IOption =
-        props.options.find((option: IOption) => props.value == option.label) ??
-        props.options[0];
-
-    const onValueChange = (value: boolean) => {
-        const targetOption =
-            props.options.find((option: IOption) => option.value == value) ??
-            props.options[0];
-        props.onValueChange(targetOption.label);
-    };
-
     return (
         <>
-            <View style={[props?.style, styles.container]}>
+            <View style={[styles.container, props?.style]}>
                 <Text variant="titleMedium" style={{}}>
-                    {targetOption.label}
+                    {props.label}
                 </Text>
                 <Switch
                     {...props}
-                    value={targetOption.value}
-                    onValueChange={onValueChange}
-                    thumbColor={targetOption.color}
+                    value={props.value}
+                    onValueChange={props.onValueChange}
+                    thumbColor={props.thumbColor}
                     trackColor={props?.trackColor}
-                    style={{}}
+                    style={{}} // DO NOT REMOVE - This is necessary for alignment
                 />
             </View>
         </>
