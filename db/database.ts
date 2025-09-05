@@ -1,3 +1,4 @@
+import { ITransactionInfo } from '@/store/transactions';
 import * as SQLite from 'expo-sqlite';
 
 let db: SQLite.SQLiteDatabase | null = null;
@@ -34,7 +35,7 @@ export async function setupDatabase() {
     }
 }
 
-export const getTransactions = async () => {
+export const getTransactions = async (): Promise<ITransactionInfo[]> => {
     try {
         const db = await openDatabase();
         return await db.getAllAsync('SELECT * FROM transactions');
@@ -44,19 +45,19 @@ export const getTransactions = async () => {
     }
 };
 
-export const addTransaction = async (trx: any) => {
+export const addTransaction = async (trx: ITransactionInfo) => {
     try {
         const db = await openDatabase();
         await db.runAsync(
             'INSERT INTO transactions (id, amount, trxType, date, paymentMethod, category, note) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [
-                trx?.id,
-                trx?.amount,
-                trx?.trxType,
-                trx?.date,
-                trx?.paymentMethod,
-                trx?.category.join(','),
-                trx?.note,
+                trx.id,
+                trx.amount,
+                trx.trxType,
+                trx.date,
+                trx.paymentMethod,
+                trx.category,
+                trx.note,
             ],
         );
     } catch (error) {
