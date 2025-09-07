@@ -10,6 +10,7 @@ import {
     useAppDispatch,
     useAppSelector,
 } from '@/store/store';
+import { options } from '@/constants/constants';
 
 export default function TransactionsSection() {
     const dispatch: AppDispatch = useAppDispatch();
@@ -29,7 +30,16 @@ export default function TransactionsSection() {
                         data={transactions}
                         renderItem={(props: {
                             item: ITransactionTileProps;
-                        }) => <TransactionTile {...props.item} />}
+                        }) => (
+                            <TransactionTile
+                                {...props.item}
+                                color={
+                                    props.item?.trxType === 'true'
+                                        ? options.transactionType.true.color
+                                        : options.transactionType.false.color
+                                }
+                            />
+                        )}
                         keyExtractor={(item: any) => item.id}
                     />
                 </SafeAreaView>

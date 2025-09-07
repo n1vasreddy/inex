@@ -2,9 +2,10 @@ import { StyleSheet, StatusBar } from 'react-native';
 
 export const transactionTileStyles = StyleSheet.create({
     container: {
-        borderRadius: 10,
+        borderRadius: 5,
         marginVertical: 10,
         padding: 10,
+        borderRightWidth: 2,
     },
     innerContainer: {
         flexDirection: 'row',
