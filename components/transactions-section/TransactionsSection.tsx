@@ -1,11 +1,25 @@
+import { useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { TransactionTile, ITransactionTileProps } from './TransactionTile';
 import { transactionSectionStyles } from '@/constants/styles';
-import { useSelector } from 'react-redux';
+import { loadTransactions } from '@/store/transactions';
+import {
+    AppDispatch,
+    RootState,
+    useAppDispatch,
+    useAppSelector,
+} from '@/store/store';
 
 export default function TransactionsSection() {
-    const transactions = useSelector((state: any) => state.transactions.data);
+    const dispatch: AppDispatch = useAppDispatch();
+    const transactions = useAppSelector(
+        (state: RootState) => state.transactions.data,
+    );
+
+    useEffect(() => {
+        dispatch(loadTransactions());
+    }, []);
 
     return (
         <>
