@@ -20,14 +20,10 @@ import useTransactions from '@/hooks/useTransactions';
 export default function TransactionEntry() {
     const dispatch = useDispatch();
     const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState<string>(
-        TransactionType.Debit,
-    );
+    const [transactionType, setTransactionType] = useState<boolean>(false);
     const [date, setDate] = useState(new Date());
-    const [paymentMethod, setPaymentMethod] = useState<string | undefined>(
-        'hdfc3',
-    );
-    const [category, setCategory] = useState<string | undefined>('');
+    const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
+    const [category, setCategory] = useState<any>('');
     const [note, setNote] = useState('');
     const { add } = useTransactions();
 
@@ -35,10 +31,10 @@ export default function TransactionEntry() {
         const payload = {
             id: uuid(),
             amount: Number(amount),
-            trxType: transactionType,
+            trxType: String(transactionType),
             date: date.toJSON(),
             paymentMethod,
-            category: [category],
+            category,
             note,
         };
         await add(payload);
@@ -89,8 +85,17 @@ export default function TransactionEntry() {
                 <ToggleInput
                     value={transactionType}
                     onValueChange={setTransactionType}
-                    options={options.transactionType}
+                    label={
+                        transactionType
+                            ? options.transactionType.true.label
+                            : options.transactionType.false.label
+                    }
                     style={transactionEntryStyles.commonStyles}
+                    thumbColor={
+                        transactionType
+                            ? options.transactionType.true.color
+                            : options.transactionType.false.color
+                    }
                     trackColor={options.transactionTypeTrackColor}
                 />
 
