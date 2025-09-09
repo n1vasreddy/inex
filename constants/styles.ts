@@ -1,33 +1,5 @@
 import { StyleSheet, StatusBar } from 'react-native';
 
-export const transactionTileStyles = StyleSheet.create({
-    container: {
-        borderRadius: 5,
-        marginVertical: 10,
-        padding: 10,
-        borderRightWidth: 2,
-    },
-    innerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    note: {
-        color: '#666',
-        fontSize: 12,
-    },
-    amount: {
-        color: '#000',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    dateTime: {
-        color: '#999',
-        fontSize: 12,
-        marginTop: 5,
-    },
-});
-
 export const transactionSectionStyles = StyleSheet.create({
     container: {
         flex: 1,
