@@ -3,23 +3,18 @@ import { FlatList } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { TransactionTile, ITransactionTileProps } from './TransactionTile';
 import { transactionSectionStyles } from '@/constants/styles';
-import { loadTransactions } from '@/store/transactions';
-import {
-    AppDispatch,
-    RootState,
-    useAppDispatch,
-    useAppSelector,
-} from '@/store/store';
+import { RootState, useAppSelector } from '@/store/store';
 import { options } from '@/constants/constants';
+import useTransactions from '@/hooks/useTransactions';
 
 export default function TransactionsSection() {
-    const dispatch: AppDispatch = useAppDispatch();
+    const { refresh } = useTransactions();
     const transactions = useAppSelector(
         (state: RootState) => state.transactions.data,
     );
 
     useEffect(() => {
-        dispatch(loadTransactions());
+        refresh();
     }, []);
 
     return (
