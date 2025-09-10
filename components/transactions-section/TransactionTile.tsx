@@ -4,14 +4,19 @@ import { Text, View } from '@/components/Themed';
 import { formatCurrency, formatDate } from '@/utils/utils';
 import { ITransactionInfo } from '@/store/transactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
 }
 
 export const TransactionTile = ({
+    id,
     amount,
+    trxType,
     date,
+    paymentMethod,
+    category,
     note,
     color,
 }: ITransactionTileProps) => {
@@ -26,6 +31,18 @@ export const TransactionTile = ({
     };
 
     const handleEdit = () => {
+        router.push({
+            pathname: '/transactionEntry',
+            params: {
+                id,
+                amount,
+                trxType,
+                date,
+                paymentMethod,
+                category,
+                note,
+            },
+        });
         setZIndex(-1);
     };
 
