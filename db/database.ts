@@ -65,3 +65,24 @@ export const addTransaction = async (trx: ITransactionInfo) => {
         return [];
     }
 };
+
+export const updateTransaction = async (trx: ITransactionInfo) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(
+            'UPDATE transactions SET amount = ?, trxType = ?, date = ?, paymentMethod = ?, category = ?, note = ? WHERE id = ?',
+            [
+                trx.amount,
+                trx.trxType,
+                trx.date,
+                trx.paymentMethod,
+                trx.category,
+                trx.note,
+                trx.id,
+            ],
+        );
+    } catch (error) {
+        console.error('Error updating transaction:', error);
+        return [];
+    }
+};
