@@ -86,3 +86,13 @@ export const updateTransaction = async (trx: ITransactionInfo) => {
         return [];
     }
 };
+
+export const deleteTransaction = async (id: string) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync('DELETE FROM transactions WHERE id = ?', [id]);
+    } catch (error) {
+        console.error('Error deleting transaction:', error);
+        return [];
+    }
+};
