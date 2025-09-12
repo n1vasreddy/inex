@@ -15,8 +15,10 @@ import { ITransactionInfo } from '@/store/transactions';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import useTransactions from '@/hooks/useTransactions';
+import { useNavigation } from 'expo-router';
 
 export default function TransactionEntry(props: ITransactionInfo) {
+    const navigation = useNavigation();
     const [isUpdate, setIsUpdate] = useState(false);
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
@@ -55,6 +57,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
             await add(payload);
         }
         await refresh();
+        navigation.goBack();
     };
 
     return (
