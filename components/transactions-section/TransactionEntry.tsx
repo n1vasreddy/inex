@@ -1,35 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Platform } from 'react-native';
 import { View } from '@/components/Themed';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
 import { transactionEntryStyles } from '@/constants/styles';
 import TextInputField from '../text-input-field/TextInputField';
-import { labels, options, TransactionType } from '@/constants/constants';
+import { labels, options } from '@/constants/constants';
 import CustomButton from '@/components/custom-button/CustomButton';
 import { Provider as PaperProvider } from 'react-native-paper';
 import DatePickerField from '@/components/date-picker-field/DatePickerField';
 import { TextInput } from 'react-native-paper';
 import ToggleInput from '@/components/toggle-input/ToggleInput';
-import { useDispatch } from 'react-redux';
-import { transactionEntry } from '@/store/transactions';
+import { ITransactionInfo } from '@/store/transactions';
 import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import useTransactions from '@/hooks/useTransactions';
 
-export default function TransactionEntry() {
-    const dispatch = useDispatch();
+export default function TransactionEntry(props: ITransactionInfo) {
+    const [isUpdate, setIsUpdate] = useState(false);
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
     const [date, setDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
     const [category, setCategory] = useState<any>('');
     const [note, setNote] = useState('');
-    const { add } = useTransactions();
+    const { add, update, refresh } = useTransactions();
+
+    useEffect(() => {
+        if (props?.id) {
+            setIsUpdate(true);
+            props?.amount && setAmount(props.amount.toString());
+            props?.trxType &&
+                setTransactionType(props.trxType === 'true' ? true : false);
+            props?.date && setDate(new Date(date));
+            props?.paymentMethod && setPaymentMethod(props.paymentMethod);
+            props?.category && setCategory(props.category);
+            props?.note && setNote(props.note);
+        }
+    }, [props?.id]);
 
     const handleSubmit = async () => {
         const payload = {
-            id: uuid(),
+            id: isUpdate ? props.id : uuid(),
             amount: Number(amount),
             trxType: String(transactionType),
             date: date.toJSON(),
@@ -37,8 +49,12 @@ export default function TransactionEntry() {
             category,
             note,
         };
-        await add(payload);
-        dispatch(transactionEntry(payload));
+        if (isUpdate) {
+            await update(payload);
+        } else {
+            await add(payload);
+        }
+        await refresh();
     };
 
     return (
