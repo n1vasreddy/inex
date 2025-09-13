@@ -1,6 +1,10 @@
 import { AppDispatch, useAppDispatch } from '@/store/store';
 import { loadTransactions } from '@/store/transactions';
-import { addTransaction, updateTransaction } from '@/db/database';
+import {
+    addTransaction,
+    updateTransaction,
+    deleteTransaction,
+} from '@/db/database';
 
 export default function useTransactions() {
     const dispatch: AppDispatch = useAppDispatch();
@@ -15,6 +19,9 @@ export default function useTransactions() {
         },
         update: async (trx: any) => {
             await updateTransaction(trx);
+        },
+        remove: async (id: string) => {
+            await deleteTransaction(id);
         },
         refresh,
     };
