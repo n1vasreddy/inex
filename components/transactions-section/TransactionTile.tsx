@@ -5,6 +5,7 @@ import { formatCurrency, formatDate } from '@/utils/utils';
 import { ITransactionInfo } from '@/store/transactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import useTransactions from '@/hooks/useTransactions';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
@@ -20,6 +21,7 @@ export const TransactionTile = ({
     note,
     color,
 }: ITransactionTileProps) => {
+    const { remove, refresh } = useTransactions();
     const [zIndex, setZIndex] = useState(-1);
 
     const handleLongPress = () => {
@@ -27,7 +29,8 @@ export const TransactionTile = ({
     };
 
     const handleDelete = () => {
-        setZIndex(-1);
+        remove(id);
+        refresh();
     };
 
     const handleEdit = () => {
@@ -148,5 +151,3 @@ const transactionTileStyles = StyleSheet.create({
     editButton: {},
     cancelButton: {},
 });
-
-// note-edit square-edit-outline
