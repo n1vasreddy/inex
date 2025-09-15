@@ -4,7 +4,7 @@ import {
     addTransaction,
     updateTransaction,
     deleteTransaction,
-} from '@/db/database';
+} from '@/db/queries';
 
 export default function useTransactions() {
     const dispatch: AppDispatch = useAppDispatch();

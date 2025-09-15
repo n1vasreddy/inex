@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getTransactions } from '../db/database';
+import { getTransactions } from '../db/queries';
 
 export interface ITransactionInfo {
     id: string;
