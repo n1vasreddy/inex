@@ -1,5 +1,5 @@
-import { ITransactionInfo } from '@/store/transactions';
 import * as SQLite from 'expo-sqlite';
+import { transactionsTableSchema } from './schema';
 
 let db: SQLite.SQLiteDatabase | null = null;
 
@@ -18,81 +18,9 @@ export async function openDatabase() {
 export async function setupDatabase() {
     try {
         const db = await openDatabase();
-        await db.execAsync(`
-            CREATE TABLE IF NOT EXISTS transactions (
-            id TEXT PRIMARY KEY NOT NULL,
-            amount REAL NOT NULL DEFAULT 0,
-            trxType TEXT NOT NULL,
-            date string NOT NULL,
-            paymentMethod TEXT NOT NULL,
-            category TEXT,
-            note TEXT
-            );
-        `);
+        await db.execAsync(transactionsTableSchema);
     } catch (error) {
         console.error('Error setting up database:', error);
         return [];
     }
 }
-
-export const getTransactions = async (): Promise<ITransactionInfo[]> => {
-    try {
-        const db = await openDatabase();
-        return await db.getAllAsync('SELECT * FROM transactions');
-    } catch (error) {
-        console.error('Error fetching transactions:', error);
-        return [];
-    }
-};
-
-export const addTransaction = async (trx: ITransactionInfo) => {
-    try {
-        const db = await openDatabase();
-        await db.runAsync(
-            'INSERT INTO transactions (id, amount, trxType, date, paymentMethod, category, note) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [
-                trx.id,
-                trx.amount,
-                trx.trxType,
-                trx.date,
-                trx.paymentMethod,
-                trx.category,
-                trx.note,
-            ],
-        );
-    } catch (error) {
-        console.error('Error adding transaction:', error);
-        return [];
-    }
-};
-
-export const updateTransaction = async (trx: ITransactionInfo) => {
-    try {
-        const db = await openDatabase();
-        await db.runAsync(
-            'UPDATE transactions SET amount = ?, trxType = ?, date = ?, paymentMethod = ?, category = ?, note = ? WHERE id = ?',
-            [
-                trx.amount,
-                trx.trxType,
-                trx.date,
-                trx.paymentMethod,
-                trx.category,
-                trx.note,
-                trx.id,
-            ],
-        );
-    } catch (error) {
-        console.error('Error updating transaction:', error);
-        return [];
-    }
-};
-
-export const deleteTransaction = async (id: string) => {
-    try {
-        const db = await openDatabase();
-        await db.runAsync('DELETE FROM transactions WHERE id = ?', [id]);
-    } catch (error) {
-        console.error('Error deleting transaction:', error);
-        return [];
-    }
-};
