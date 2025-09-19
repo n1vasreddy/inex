@@ -1,4 +1,3 @@
-
 // Function to format currency
 export const formatCurrency = (amount: number) => {
     const formatter = new Intl.NumberFormat('en-US', {
@@ -6,7 +5,7 @@ export const formatCurrency = (amount: number) => {
         currency: 'INR',
     });
     return formatter.format(amount);
-}
+};
 
 // Function to format date along with HH:MM
 export const formatDate = (date: Date) => {
@@ -18,4 +17,4 @@ export const formatDate = (date: Date) => {
         minute: 'numeric',
     });
     return formatter.format(date);
-}
+};
