@@ -5,7 +5,7 @@ export interface ITransactionInfo {
     id: string;
     amount: number;
     trxType: string;
-    date: string;
+    trxDate: string;
     paymentMethod: string;
     category: string;
     note: string;

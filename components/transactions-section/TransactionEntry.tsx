@@ -22,7 +22,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
     const [isUpdate, setIsUpdate] = useState(false);
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
-    const [date, setDate] = useState(new Date());
+    const [trxDate, setTrxDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
     const [category, setCategory] = useState<any>('');
     const [note, setNote] = useState('');
@@ -34,7 +34,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
             props?.amount && setAmount(props.amount.toString());
             props?.trxType &&
                 setTransactionType(props.trxType === 'true' ? true : false);
-            props?.date && setDate(new Date(date));
+            props?.trxDate && setTrxDate(new Date(trxDate));
             props?.paymentMethod && setPaymentMethod(props.paymentMethod);
             props?.category && setCategory(props.category);
             props?.note && setNote(props.note);
@@ -46,7 +46,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
             id: isUpdate ? props.id : uuid(),
             amount: Number(amount),
             trxType: String(transactionType),
-            date: date.toJSON(),
+            trxDate: trxDate.toJSON(),
             paymentMethod,
             category,
             note,
@@ -88,8 +88,8 @@ export default function TransactionEntry(props: ITransactionInfo) {
                 />
 
                 <DatePickerField
-                    date={date}
-                    onDateChange={setDate}
+                    trxDate={trxDate}
+                    onDateChange={setTrxDate}
                     label={labels.transactionDate}
                     style={transactionEntryStyles.commonStyles}
                 />

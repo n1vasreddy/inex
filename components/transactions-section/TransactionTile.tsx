@@ -15,7 +15,7 @@ export const TransactionTile = ({
     id,
     amount,
     trxType,
-    date,
+    trxDate,
     paymentMethod,
     category,
     note,
@@ -40,7 +40,7 @@ export const TransactionTile = ({
                 id,
                 amount,
                 trxType,
-                date,
+                trxDate,
                 paymentMethod,
                 category,
                 note,
@@ -69,7 +69,7 @@ export const TransactionTile = ({
                 </View>
                 <View style={transactionTileStyles.innerContainer}>
                     <Text style={transactionTileStyles.dateTime}>
-                        {formatDate(new Date(date))}
+                        {formatDate(new Date(trxDate))}
                     </Text>
                 </View>
                 <View

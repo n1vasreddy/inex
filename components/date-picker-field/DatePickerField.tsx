@@ -7,10 +7,12 @@ import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 
 interface IDatePickerFieldProps {
     label: string;
-    date: Date;
+    trxDate: Date;
     onDateChange: (date: any) => void;
     style?: StyleProp<any>;
 }
+
+type ITimePicked = { hours: number; minutes: number };
 
 export default function DatePickerField(props: IDatePickerFieldProps) {
     const [open, setOpen] = useState(false);
@@ -18,7 +20,7 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
 
     // Set date
     const onDateConfirmSingle = React.useCallback(
-        (params) => {
+        (params: { date: Date }) => {
             setOpen(false);
             props?.onDateChange(params.date);
             setVisible(true);
@@ -26,21 +28,17 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
         [setOpen, props?.onDateChange],
     );
 
-    // Dismiss date popup
     const onDateDismissSingle = React.useCallback(() => {
         setOpen(false);
     }, [setOpen]);
 
-    // Set time
     const onTimeConfirm = React.useCallback(
-        ({ hours, minutes }) => {
+        ({ hours, minutes }: ITimePicked) => {
             setVisible(false);
-            console.log({ hours, minutes });
         },
         [setVisible],
     );
 
-    // Dismiss time popup
     const onTimeDismiss = React.useCallback(() => {
         setVisible(false);
     }, [setVisible]);
@@ -58,7 +56,7 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
                     <View style={styles.topHalf} />
                     <View style={styles.bottomHalf} />
                 </View>
-                <Text>{formatDate(props.date)}</Text>
+                <Text>{formatDate(props.trxDate)}</Text>
                 <Pressable onPress={() => setOpen(true)} style={styles.icon}>
                     <EvilIcons name="calendar" size={34} color="black" />
                 </Pressable>
@@ -68,7 +66,7 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
                 mode="single"
                 visible={open}
                 onDismiss={onDateDismissSingle}
-                date={props.date}
+                date={props.trxDate}
                 onConfirm={onDateConfirmSingle}
                 label={props.label}
             />
@@ -76,8 +74,8 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
                 visible={visible}
                 onDismiss={onTimeDismiss}
                 onConfirm={onTimeConfirm}
-                hours={props.date.getHours()}
-                minutes={props.date.getMinutes()}
+                hours={props.trxDate.getHours()}
+                minutes={props.trxDate.getMinutes()}
                 label={props.label}
             />
         </>

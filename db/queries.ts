@@ -24,7 +24,7 @@ export const addTransaction = async (trx: ITransactionInfo) => {
             trx.id,
             trx.amount,
             trx.trxType,
-            trx.date,
+            trx.trxDate,
             trx.paymentMethod,
             trx.category,
             trx.note,
@@ -41,7 +41,7 @@ export const updateTransaction = async (trx: ITransactionInfo) => {
         await db.runAsync(updateTransactionQuery, [
             trx.amount,
             trx.trxType,
-            trx.date,
+            trx.trxDate,
             trx.paymentMethod,
             trx.category,
             trx.note,
