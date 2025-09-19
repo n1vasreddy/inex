@@ -35,6 +35,11 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
     const onTimeConfirm = React.useCallback(
         ({ hours, minutes }: ITimePicked) => {
             setVisible(false);
+            props?.onDateChange((date: Date) => {
+                date.setHours(hours);
+                date.setMinutes(minutes);
+                return date;
+            });
         },
         [setVisible],
     );
