@@ -15,6 +15,8 @@ function TabBarIcon(props: {
     return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
+type IColor = { color: string };
+
 export default function TabLayout() {
     const colorScheme = useColorScheme();
 
@@ -31,7 +33,7 @@ export default function TabLayout() {
                 name="index"
                 options={{
                     title: 'Tab One',
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({ color }: IColor) => (
                         <TabBarIcon name="code" color={color} />
                     ),
                     headerRight: () => (
@@ -55,25 +57,25 @@ export default function TabLayout() {
                     ),
                 }}
             />
-            {/* <Tabs.Screen
-                name="two"
-                options={{
-                    title: 'Tab Two',
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="code" color={color} />
-                    ),
-                }}
-            /> */}
             <Tabs.Screen
                 name="transactions"
                 options={{
                     title: 'Transactions',
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({ color }: IColor) => (
                         <FontAwesome6
                             name="money-bill-transfer"
                             size={24}
                             color={color}
                         />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color }: IColor) => (
+                        <FontAwesome6 name="gears" size={24} color={color} />
                     ),
                 }}
             />
