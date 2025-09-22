@@ -5,6 +5,8 @@ import colors from '@/constants/colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
+type IColor = { color: string };
+
 export default function TabLayout() {
     const colorScheme = useColorScheme();
 
@@ -21,7 +23,7 @@ export default function TabLayout() {
                 name="index"
                 options={{
                     title: 'Dashboard',
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({ color }: IColor) => (
                         <FontAwesome6
                             name="chart-pie"
                             size={24}
@@ -30,25 +32,25 @@ export default function TabLayout() {
                     ),
                 }}
             />
-            {/* <Tabs.Screen
-                name="two"
-                options={{
-                    title: 'Tab Two',
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="code" color={color} />
-                    ),
-                }}
-            /> */}
             <Tabs.Screen
                 name="transactions"
                 options={{
                     title: 'Transactions',
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({ color }: IColor) => (
                         <FontAwesome6
                             name="money-bill-transfer"
                             size={24}
                             color={color}
                         />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color }: IColor) => (
+                        <FontAwesome6 name="gears" size={24} color={color} />
                     ),
                 }}
             />
