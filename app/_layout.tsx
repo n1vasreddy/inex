@@ -72,10 +72,6 @@ function RootLayoutNav() {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name="modal"
-                        options={{ presentation: 'modal' }}
-                    />
-                    <Stack.Screen
                         name="transactionEntry"
                         options={{
                             presentation: 'modal', // This makes it appear as a modal
