@@ -82,6 +82,27 @@ function RootLayoutNav() {
                             title: 'Transaction Entry', // Set your modal title here
                         }}
                     />
+                    <Stack.Screen
+                        name="balances"
+                        options={{
+                            presentation: 'modal', // This makes it appear as a modal
+                            title: 'Manage Balances', // Set your modal title here
+                        }}
+                    />
+                    <Stack.Screen
+                        name="accounts"
+                        options={{
+                            presentation: 'modal', // This makes it appear as a modal
+                            title: 'Payment Methods', // Set your modal title here
+                        }}
+                    />
+                    <Stack.Screen
+                        name="tags"
+                        options={{
+                            presentation: 'modal', // This makes it appear as a modal
+                            title: 'Manage Categories', // Set your modal title here
+                        }}
+                    />
                 </Stack>
                 <AnimatedFAB
                     icon={'plus'}
