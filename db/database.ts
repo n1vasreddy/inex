@@ -15,10 +15,10 @@ export async function openDatabase() {
     }
 }
 
-export async function setupDatabase() {
+export async function setupDatabase(schema: string) {
     try {
         const db = await openDatabase();
-        await db.execAsync(transactionsTableSchema);
+        await db.execAsync(schema);
     } catch (error) {
         console.error('Error setting up database:', error);
         return [];
