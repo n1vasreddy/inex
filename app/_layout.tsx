@@ -101,6 +101,13 @@ function RootLayoutNav() {
                             title: 'Manage Categories', // Set your modal title here
                         }}
                     />
+                    <Stack.Screen
+                        name="newTag"
+                        options={{
+                            presentation: 'modal', // This makes it appear as a modal
+                            title: 'Add New Tag', // Set your modal title here
+                        }}
+                    />
                 </Stack>
                 <AnimatedFAB
                     icon={'plus'}
