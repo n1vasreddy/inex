@@ -10,6 +10,14 @@ export const transactionsTableSchema = `
     );
 `;
 
+export const tagsTableSchema = `
+    CREATE TABLE IF NOT EXISTS tags (
+        id TEXT PRIMARY KEY NOT NULL,
+        tagName TEXT NOT NULL,
+        tagEmoji TEXT NOT NULL,
+    );
+`;
+
 export const getAllTransactionsQuery = 'SELECT * FROM transactions';
 
 export const postTransactionQuery =
