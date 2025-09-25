@@ -15,6 +15,7 @@ import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { tagsTableSchema, transactionsTableSchema } from '@/db/schema';
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -36,7 +37,8 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
-        setupDatabase();
+        setupDatabase(transactionsTableSchema);
+        setupDatabase(tagsTableSchema);
     }, []);
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
