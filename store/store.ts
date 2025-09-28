@@ -5,9 +5,11 @@ import {
     type TypedUseSelectorHook,
 } from 'react-redux';
 import transactionsReducer from './transactions';
+import tagsReducer from './tags';
 
 const rootReducer = {
     transactions: transactionsReducer,
+    tags: tagsReducer,
 };
 
 const store = configureStore({
