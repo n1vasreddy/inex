@@ -1,47 +1,38 @@
-import { useRouter } from 'expo-router';
 import * as React from 'react';
+import { useAppSelector } from '@/store/store';
+import { useRouter } from 'expo-router';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Avatar, Text, IconButton, Button, useTheme } from 'react-native-paper';
-
-type Tag = { id: string; emoji: string; name: string };
-
-const mockTags: Tag[] = [
-    { id: '1', emoji: '🍔', name: 'Food' },
-    { id: '2', emoji: '✈️', name: 'Travel' },
-    { id: '3', emoji: '🏠', name: 'Rent' },
-    { id: '4', emoji: '🎁', name: 'Gifts' },
-];
+import { ITag } from '@/store/tags';
 
 export default function Tags() {
     const router = useRouter();
-    const [tags, setTags] = React.useState<Tag[]>(mockTags);
+    const tags: ITag[] = useAppSelector((state) => state.tags.data);
     const theme = useTheme();
 
     const handleDelete = (id: string) => {
-        setTags(tags.filter((tag) => tag.id !== id));
+        // Handle tag deletion
     };
 
     const handleAdd = () => {
         router.navigate('./newTag');
-        // const nextTag: Tag = {
-        //     id: (Math.random() + '').slice(2),
-        //     emoji: '⭐️',
-        //     name: `New Tag ${tags.length + 1}`,
-        // };
-        // setTags((prev) => [...prev, nextTag]);
     };
 
-    const renderItem = ({ item }: { item: Tag }) => (
+    const renderItem = ({ item }: { item: ITag }) => (
         <View style={styles.row}>
-            <Avatar.Text size={36} label={item.emoji} style={styles.avatar} />
+            <Avatar.Text
+                size={36}
+                label={item.tagEmoji}
+                style={styles.avatar}
+            />
             <Text variant="titleMedium" style={styles.text}>
-                {item.name}
+                {item.tagName}
             </Text>
             <IconButton
                 icon="delete"
                 size={20}
                 onPress={() => handleDelete(item.id)}
-                accessibilityLabel={`Delete ${item.name}`}
+                accessibilityLabel={`Delete ${item.tagName}`}
                 style={styles.delete}
                 iconColor={theme.colors.error}
             />
