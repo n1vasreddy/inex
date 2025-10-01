@@ -27,3 +27,6 @@ export const updateTransactionQuery =
     'UPDATE transactions SET amount = ?, trxType = ?, trxDate = ?, paymentMethod = ?, category = ?, note = ? WHERE id = ?';
 
 export const deleteTransactionQuery = 'DELETE FROM transactions WHERE id = ?';
+
+export const postTagQuery =
+    'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
