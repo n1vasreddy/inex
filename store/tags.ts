@@ -16,9 +16,16 @@ interface ITagEntry {
     payload: ITag;
 }
 
+const mockTags: ITag[] = [
+    { id: '1', tagEmoji: '🍔', tagName: 'Food' },
+    { id: '2', tagEmoji: '✈️', tagName: 'Travel' },
+    { id: '3', tagEmoji: '🏠', tagName: 'Rent' },
+    { id: '4', tagEmoji: '🎁', tagName: 'Gifts' },
+];
+
 export const tagsSlice = createSlice({
     name: 'tags',
-    initialState: { data: [] } as ITags,
+    initialState: { data: mockTags } as ITags,
     reducers: {
         tagEntry: (state: ITags, action: ITagEntry) => {
             state.data = [...state.data, action.payload];
