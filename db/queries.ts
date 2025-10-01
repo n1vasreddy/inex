@@ -1,8 +1,10 @@
 import { openDatabase } from './database';
 import { ITransactionInfo } from '@/store/transactions';
+import { ITag } from '@/store/tags';
 import {
     deleteTransactionQuery,
     getAllTransactionsQuery,
+    postTagQuery,
     postTransactionQuery,
     updateTransactionQuery,
 } from './schema';
@@ -59,6 +61,16 @@ export const deleteTransaction = async (id: string) => {
         await db.runAsync(deleteTransactionQuery, [id]);
     } catch (error) {
         console.error('Error deleting transaction:', error);
+        return [];
+    }
+};
+
+export const addTag = async (tag: ITag) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(postTagQuery, [tag.id, tag.tagName, tag.tagEmoji]);
+    } catch (error) {
+        console.error('Error adding tag:', error);
         return [];
     }
 };
