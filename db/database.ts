@@ -1,5 +1,4 @@
 import * as SQLite from 'expo-sqlite';
-import { transactionsTableSchema } from './schema';
 
 let db: SQLite.SQLiteDatabase | null = null;
 
