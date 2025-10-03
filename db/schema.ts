@@ -28,5 +28,7 @@ export const updateTransactionQuery =
 
 export const deleteTransactionQuery = 'DELETE FROM transactions WHERE id = ?';
 
+export const getAllTagsQuery = 'SELECT * FROM tags';
+
 export const postTagQuery =
     'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
