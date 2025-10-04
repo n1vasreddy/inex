@@ -3,6 +3,7 @@ import { ITransactionInfo } from '@/store/transactions';
 import { ITag } from '@/store/tags';
 import {
     deleteTransactionQuery,
+    getAllTagsQuery,
     getAllTransactionsQuery,
     postTagQuery,
     postTransactionQuery,
@@ -61,6 +62,16 @@ export const deleteTransaction = async (id: string) => {
         await db.runAsync(deleteTransactionQuery, [id]);
     } catch (error) {
         console.error('Error deleting transaction:', error);
+        return [];
+    }
+};
+
+export const getTags = async (): Promise<ITag[]> => {
+    try {
+        const db = await openDatabase();
+        return await db.getAllAsync(getAllTagsQuery);
+    } catch (error) {
+        console.error('Error fetching tags:', error);
         return [];
     }
 };
