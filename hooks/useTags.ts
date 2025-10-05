@@ -1,11 +1,12 @@
 import { addTag } from '@/db/queries';
 import { AppDispatch, useAppDispatch } from '@/store/store';
+import { loadTags } from '@/store/tags';
 
-export default function useTransactions() {
+export default function useTags() {
     const dispatch: AppDispatch = useAppDispatch();
 
-    const refresh = async () => {
-        // dispatch(loadTransactions());
+    const refreshTags = async () => {
+        dispatch(loadTags());
     };
 
     return {
@@ -15,6 +16,6 @@ export default function useTransactions() {
         // remove: async (id: string) => {
         //     await deleteTransaction(id);
         // },
-        refresh,
+        refreshTags,
     };
 }
