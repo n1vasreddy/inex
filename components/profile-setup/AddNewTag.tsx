@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import { useNavigation } from 'expo-router';
+import { v4 as uuid } from 'uuid';
+import useTags from '@/hooks/useTags';
 
 const AddNewTag = () => {
+    const navigation = useNavigation();
+    const { addTag, refreshTags } = useTags();
     const [tagName, setTagName] = useState('');
     const [tagEmoji, setTagEmoji] = useState('');
 
-    const handleAddTag = () => {
+    const handleAddTag = async () => {
         if (tagName && tagEmoji) {
-            // Call the API to add the tag
-            console.log(`Adding tag: ${tagName} with emoji: ${tagEmoji}`);
+            await addTag({ id: uuid(), tagName, tagEmoji });
+            await refreshTags();
+            navigation.goBack();
         }
     };
 
