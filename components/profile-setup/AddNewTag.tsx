@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from 'expo-router';
 import { v4 as uuid } from 'uuid';
@@ -20,7 +20,7 @@ const AddNewTag = () => {
     };
 
     return (
-        <View>
+        <View style={addNewTagStyles.container}>
             <TextInput
                 label="Tag Name"
                 value={tagName}
@@ -39,3 +39,14 @@ const AddNewTag = () => {
 };
 
 export default AddNewTag;
+
+const addNewTagStyles = StyleSheet.create({
+    container: {
+        height: '100%',
+        padding: 16,
+        flexDirection: 'column',
+        rowGap: 10,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+});
