@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from 'expo-router';
-import { v4 as uuid } from 'uuid';
 import useTags from '@/hooks/useTags';
 
 const AddNewTag = () => {
@@ -13,7 +12,11 @@ const AddNewTag = () => {
 
     const handleAddTag = async () => {
         if (tagName && tagEmoji) {
-            await addTag({ id: uuid(), tagName, tagEmoji });
+            await addTag({
+                id: tagName.split(' ').join('-').trim(),
+                tagName,
+                tagEmoji,
+            });
             await refreshTags();
             navigation.goBack();
         }
