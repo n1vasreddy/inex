@@ -1,6 +1,6 @@
-import { addTag } from '@/db/queries';
 import { AppDispatch, useAppDispatch } from '@/store/store';
-import { loadTags } from '@/store/tags';
+import { ITag, loadTags } from '@/store/tags';
+import { addTag, deleteTag } from '@/db/queries';
 
 export default function useTags() {
     const dispatch: AppDispatch = useAppDispatch();
@@ -10,12 +10,14 @@ export default function useTags() {
     };
 
     return {
-        addTag: async (trx: any) => {
-            await addTag(trx);
+        addTag: async (tag: ITag) => {
+            await addTag(tag);
+            await refreshTags();
         },
-        // remove: async (id: string) => {
-        //     await deleteTransaction(id);
-        // },
+        removeTag: async (id: string) => {
+            await deleteTag(id);
+            await refreshTags();
+        },
         refreshTags,
     };
 }
