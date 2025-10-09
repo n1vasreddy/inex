@@ -33,5 +33,4 @@ export const getAllTagsQuery = 'SELECT * FROM tags';
 export const postTagQuery =
     'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
 
-export const deleteTagQuery =
-    'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
+export const deleteTagQuery = 'DELETE FROM tags WHERE id = ?';
