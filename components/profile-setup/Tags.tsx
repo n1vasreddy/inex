@@ -1,17 +1,23 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import { useAppSelector } from '@/store/store';
 import { useRouter } from 'expo-router';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Avatar, Text, IconButton, Button, useTheme } from 'react-native-paper';
 import { ITag } from '@/store/tags';
+import useTags from '@/hooks/useTags';
 
 export default function Tags() {
     const router = useRouter();
     const tags: ITag[] = useAppSelector((state) => state.tags.data);
     const theme = useTheme();
+    const { removeTag, refreshTags } = useTags();
 
-    const handleDelete = (id: string) => {
-        // Handle tag deletion
+    useEffect(() => {
+        refreshTags();
+    }, []);
+
+    const handleDelete = async (id: string) => {
+        await removeTag(id);
     };
 
     const handleAdd = () => {
