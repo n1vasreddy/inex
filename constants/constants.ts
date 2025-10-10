@@ -14,12 +14,6 @@ export const options = {
         false: { label: 'Debit', value: false, color: '#f51720' },
     },
     transactionTypeTrackColor: { true: '#46b779', false: '#f7454d' },
-    category: [
-        { label: 'Food', value: 'food' },
-        { label: 'Grocery', value: 'grocery' },
-        { label: 'Bike', value: 'bike' },
-        { label: 'Fuel', value: 'fuel' },
-    ],
     paymentMethods: [
         { label: 'HDFC Bank Debit Card', value: 'hdfc1' },
         { label: 'HDFC Moneyback Plus Credit Card', value: 'hdfc2' },
