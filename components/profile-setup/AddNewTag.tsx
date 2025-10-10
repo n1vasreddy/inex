@@ -6,20 +6,20 @@ import useTags from '@/hooks/useTags';
 
 const AddNewTag = () => {
     const navigation = useNavigation();
-    const { addTag, refreshTags } = useTags();
+    const { addTag } = useTags();
     const [tagName, setTagName] = useState('');
     const [tagEmoji, setTagEmoji] = useState('');
 
     const handleAddTag = async () => {
         if (tagName && tagEmoji) {
-            await addTag({
+            const tagInfo = {
                 id: tagName.split(' ').join('-').trim(),
                 tagName,
                 tagEmoji,
-            });
-            await refreshTags();
-            navigation.goBack();
+            };
+            await addTag(tagInfo);
         }
+        navigation.goBack();
     };
 
     return (
