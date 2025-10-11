@@ -16,17 +16,26 @@ import 'react-native-get-random-values';
 import { v4 as uuid } from 'uuid';
 import useTransactions from '@/hooks/useTransactions';
 import { useNavigation } from 'expo-router';
+import ChipSelectionInput from '@/components/chip-input/ChipSelectionInput';
+import { RootState, useAppSelector } from '@/store/store';
+import useTags from '@/hooks/useTags';
 
 export default function TransactionEntry(props: ITransactionInfo) {
     const navigation = useNavigation();
+    const tagsData = useAppSelector((state: RootState) => state.tags.data);
     const [isUpdate, setIsUpdate] = useState(false);
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
     const [trxDate, setTrxDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
-    const [category, setCategory] = useState<any>('');
+    const [category, setCategory] = useState<string[]>([]);
     const [note, setNote] = useState('');
     const { add, update, refresh } = useTransactions();
+    const { refreshTags } = useTags();
+
+    useEffect(() => {
+        refreshTags();
+    }, []);
 
     useEffect(() => {
         if (props?.id) {
@@ -36,7 +45,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
                 setTransactionType(props.trxType === 'true' ? true : false);
             props?.trxDate && setTrxDate(new Date(trxDate));
             props?.paymentMethod && setPaymentMethod(props.paymentMethod);
-            props?.category && setCategory(props.category);
+            props?.category && setCategory(props.category.split(','));
             props?.note && setNote(props.note);
         }
     }, [props?.id]);
@@ -48,7 +57,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
             trxType: String(transactionType),
             trxDate: trxDate.toJSON(),
             paymentMethod,
-            category,
+            category: category.join(','),
             note,
         };
         if (isUpdate) {
@@ -79,11 +88,11 @@ export default function TransactionEntry(props: ITransactionInfo) {
                     style={transactionEntryStyles.commonStyles}
                 />
 
-                <DropdownField
+                <ChipSelectionInput
+                    data={tagsData}
                     label={labels.category}
                     value={category}
-                    onSelect={setCategory}
-                    options={options.category}
+                    onChange={setCategory}
                     style={transactionEntryStyles.commonStyles}
                 />
 
