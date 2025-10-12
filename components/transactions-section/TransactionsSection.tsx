@@ -16,7 +16,7 @@ export default function TransactionsSection() {
     );
 
     useEffect(() => {
-        refresh();
+        if (!transactions.length) refresh();
     }, []);
 
     return (

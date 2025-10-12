@@ -69,12 +69,15 @@ export default function useTransactions() {
     return {
         add: async (trx: any) => {
             await addTransaction(trx);
+            await refresh();
         },
         update: async (trx: any) => {
             await updateTransaction(trx);
+            await refresh();
         },
         remove: async (id: string) => {
             await deleteTransaction(id);
+            await refresh();
         },
         exportToExcel,
         refresh,

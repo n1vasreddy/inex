@@ -30,11 +30,11 @@ export default function TransactionEntry(props: ITransactionInfo) {
     const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
     const [category, setCategory] = useState<string[]>([]);
     const [note, setNote] = useState('');
-    const { add, update, refresh } = useTransactions();
+    const { add, update } = useTransactions();
     const { refreshTags } = useTags();
 
     useEffect(() => {
-        refreshTags();
+        if (!tagsData.length) refreshTags();
     }, []);
 
     useEffect(() => {
@@ -65,7 +65,6 @@ export default function TransactionEntry(props: ITransactionInfo) {
         } else {
             await add(payload);
         }
-        await refresh();
         navigation.goBack();
     };
 

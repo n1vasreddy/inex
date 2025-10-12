@@ -13,7 +13,7 @@ export default function Tags() {
     const { removeTag, refreshTags } = useTags();
 
     useEffect(() => {
-        refreshTags();
+        if (!tags.length) refreshTags();
     }, []);
 
     const handleDelete = async (id: string) => {

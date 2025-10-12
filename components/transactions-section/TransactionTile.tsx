@@ -21,7 +21,7 @@ export const TransactionTile = ({
     note,
     color,
 }: ITransactionTileProps) => {
-    const { remove, refresh } = useTransactions();
+    const { remove } = useTransactions();
     const [zIndex, setZIndex] = useState(-1);
 
     const handleLongPress = () => {
@@ -30,7 +30,6 @@ export const TransactionTile = ({
 
     const handleDelete = () => {
         remove(id);
-        refresh();
     };
 
     const handleEdit = () => {
