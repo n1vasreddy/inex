@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Tabs } from 'expo-router';
 import colors from '@/constants/colors';
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from 'react-native';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 
 type IColor = { color: string };

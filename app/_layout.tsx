@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { useColorScheme } from 'react-native';
 import { tagsTableSchema, transactionsTableSchema } from '@/db/schema';
 
 export {
