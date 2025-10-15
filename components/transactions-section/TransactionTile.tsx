@@ -6,10 +6,13 @@ import { ITransactionInfo } from '@/store/transactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import useTransactions from '@/hooks/useTransactions';
+import { StyledText } from '../styled-text/StyledText';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
 }
+
+const pepperRedColor = "#f51720"
 
 export const TransactionTile = ({
     id,
@@ -61,7 +64,7 @@ export const TransactionTile = ({
                 ]}
             >
                 <View style={transactionTileStyles.innerContainer}>
-                    <Text style={transactionTileStyles.note}>{note}</Text>
+                    <StyledText style={transactionTileStyles.note}>{note}</StyledText>
                     <Text style={transactionTileStyles.amount}>
                         {formatCurrency(amount)}
                     </Text>
@@ -81,7 +84,7 @@ export const TransactionTile = ({
                         <MaterialCommunityIcons
                             name="trash-can"
                             size={28}
-                            color="#f51720"
+                            color={pepperRedColor}
                         />
                     </Pressable>
                     <Pressable
@@ -91,7 +94,7 @@ export const TransactionTile = ({
                         <MaterialCommunityIcons
                             name="square-edit-outline"
                             size={28}
-                            color="#f51720"
+                            color={pepperRedColor}
                         />
                     </Pressable>
                     <Pressable
@@ -101,7 +104,7 @@ export const TransactionTile = ({
                         <MaterialCommunityIcons
                             name="window-close"
                             size={28}
-                            color="#f51720"
+                            color={pepperRedColor}
                         />
                     </Pressable>
                 </View>
