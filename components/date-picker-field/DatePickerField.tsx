@@ -1,7 +1,7 @@
 import { formatDate } from '@/utils/utils';
 import React, { useState } from 'react';
 import { View, StyleSheet, StyleProp, Pressable } from 'react-native';
-import { Text } from 'react-native-paper';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
 

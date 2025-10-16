@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useAppSelector } from '@/store/store';
 import { useRouter } from 'expo-router';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { Avatar, Text, IconButton, Button, useTheme } from 'react-native-paper';
+import { Avatar, IconButton, Button, useTheme } from 'react-native-paper';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { ITag } from '@/store/tags';
 import useTags from '@/hooks/useTags';
 

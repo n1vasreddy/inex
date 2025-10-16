@@ -1,7 +1,8 @@
 import { ITag } from '@/store/tags';
 import React from 'react';
 import { View, StyleSheet, StyleProp } from 'react-native';
-import { Chip, Text } from 'react-native-paper';
+import { Chip } from 'react-native-paper';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 
 interface IChipSelectionInputProps {
     label: string;

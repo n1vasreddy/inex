@@ -6,8 +6,8 @@ import { TransactionTile, ITransactionTileProps } from './TransactionTile';
 import { RootState, useAppSelector } from '@/store/store';
 import { options } from '@/constants/constants';
 import useTransactions from '@/hooks/useTransactions';
-import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 
 export default function TransactionsSection() {
     const { refresh, exportToExcel } = useTransactions();

@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { View, StyleSheet, StyleProp } from 'react-native';
-import { Text, Switch } from 'react-native-paper';
+import { Switch } from 'react-native-paper';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 
 interface IToggleInput extends ComponentProps<typeof Switch> {
     label: string;

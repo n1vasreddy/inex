@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
-import { Text } from 'react-native-paper';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { StyleSheet } from 'react-native';
 
 const MasterSetup = () => {

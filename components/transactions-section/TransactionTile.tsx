@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { StyleSheet, Pressable } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { View } from '@/components/Themed';
+import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { formatCurrency, formatDate } from '@/utils/utils';
 import { ITransactionInfo } from '@/store/transactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import useTransactions from '@/hooks/useTransactions';
-import { StyledText } from '../styled-text/StyledText';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
 }
 
-const pepperRedColor = "#f51720"
+const pepperRedColor = '#f51720';
 
 export const TransactionTile = ({
     id,
@@ -64,7 +64,7 @@ export const TransactionTile = ({
                 ]}
             >
                 <View style={transactionTileStyles.innerContainer}>
-                    <StyledText style={transactionTileStyles.note}>{note}</StyledText>
+                    <Text style={transactionTileStyles.note}>{note}</Text>
                     <Text style={transactionTileStyles.amount}>
                         {formatCurrency(amount)}
                     </Text>
