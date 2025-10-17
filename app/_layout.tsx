@@ -37,8 +37,10 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
-        setupDatabase(transactionsTableSchema);
-        setupDatabase(tagsTableSchema);
+        (async () => {
+            await setupDatabase(transactionsTableSchema);
+            await setupDatabase(tagsTableSchema);
+        })();
     }, []);
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
