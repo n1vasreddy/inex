@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FlatList, Pressable, View } from 'react-native';
+import { FlatList, Pressable, useColorScheme, View } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, StatusBar } from 'react-native';
 import { TransactionTile, ITransactionTileProps } from './TransactionTile';
@@ -8,8 +8,10 @@ import { options } from '@/constants/constants';
 import useTransactions from '@/hooks/useTransactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
+import colors from '@/constants/Colors';
 
 export default function TransactionsSection() {
+    const colorScheme = useColorScheme();
     const { refresh, exportToExcel } = useTransactions();
     const transactions = useAppSelector(
         (state: RootState) => state.transactions.data,
@@ -21,7 +23,11 @@ export default function TransactionsSection() {
 
     return (
         <>
-            <SafeAreaProvider>
+            <SafeAreaProvider
+                style={{
+                    backgroundColor: colors[colorScheme ?? 'light'].background,
+                }}
+            >
                 <View style={transactionSectionStyles.exportContainer}>
                     <Pressable
                         onPress={exportToExcel}
