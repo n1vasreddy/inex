@@ -2,12 +2,23 @@ import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
+import colors from '@/constants/Colors';
 
 const MasterSetup = () => {
+    const colorScheme = useColorScheme();
+
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={masterSetupStyles.containerStyle}>
+            <SafeAreaView
+                style={[
+                    {
+                        backgroundColor:
+                            colors[colorScheme ?? 'light'].background,
+                    },
+                    masterSetupStyles.containerStyle,
+                ]}
+            >
                 <Link href={'/balances'} style={masterSetupStyles.linkStyle}>
                     <Text variant="titleMedium">Manage Balances</Text>
                 </Link>
