@@ -10,14 +10,13 @@ import { ITransactionInfo } from '@/store/transactions';
 import { openDatabase } from '@/db/database';
 import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
 import { StorageAccessFramework } from 'expo-file-system';
 
 export default function useTransactions() {
     const dispatch: AppDispatch = useAppDispatch();
 
     const refresh = async () => {
-        dispatch(loadTransactions());
+        await dispatch(loadTransactions());
     };
 
     const exportToExcel = async () => {

@@ -13,9 +13,9 @@ import { AnimatedFAB } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
-
 import { useColorScheme } from 'react-native';
 import { tagsTableSchema, transactionsTableSchema } from '@/db/schema';
+import colors from '@/constants/Colors';
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -119,10 +119,12 @@ function RootLayoutNav() {
                     visible={true}
                     animateFrom={'right'}
                     iconMode={'static'}
+                    color={colors[colorScheme ?? 'light'].text}
                     style={{
                         bottom: 86,
                         right: 16,
                         position: 'absolute',
+                        backgroundColor: colors.fuchsia,
                     }}
                 />
             </ThemeProvider>
