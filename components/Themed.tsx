@@ -8,6 +8,7 @@ import { Text as DefaultText } from 'react-native-paper';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from 'react-native';
+import colors from '@/constants/Colors';
 
 type ThemeProps = {
     lightColor?: string;
@@ -34,8 +35,14 @@ export function useThemeColor(
 export function Text(props: TextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
     const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+    const colorScheme = useColorScheme();
 
-    return <DefaultText style={[{ color }, style]} {...otherProps} />;
+    return (
+        <DefaultText
+            style={[{ color: colors[colorScheme ?? 'light'].text }, style]}
+            {...otherProps}
+        />
+    );
 }
 
 export function View(props: ViewProps) {

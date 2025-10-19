@@ -1,5 +1,10 @@
 import { Text, TextProps } from '../Themed';
 
 export function StyledText(props: TextProps) {
-    return <Text {...props} style={[props.style, { fontFamily: 'Roboto' }]} />;
+    return (
+        <Text
+            {...props}
+            style={[props.style, { fontFamily: 'Roboto', fontWeight: '700' }]}
+        />
+    );
 }
