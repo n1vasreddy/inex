@@ -49,6 +49,7 @@ export default function TransactionsSection() {
                 <SafeAreaView style={transactionSectionStyles.container}>
                     <FlatList
                         data={transactions}
+                        style={{ width: '80%' }}
                         renderItem={(props: {
                             item: ITransactionTileProps;
                         }) => (
@@ -72,10 +73,6 @@ export default function TransactionsSection() {
 const transactionSectionStyles = StyleSheet.create({
     container: {
         alignItems: 'center',
-    },
-    container1: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
     },
     item: {
         backgroundColor: '#93DA97',
