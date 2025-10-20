@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet, StatusBar as StatusBarr } from 'react-native';
 import { View } from '@/components/Themed';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
-import { transactionEntryStyles } from '@/constants/styles';
 import TextInputField from '../text-input-field/TextInputField';
 import { labels, options } from '@/constants/constants';
 import CustomButton from '@/components/custom-button/CustomButton';
@@ -19,6 +18,7 @@ import { useNavigation } from 'expo-router';
 import ChipSelectionInput from '@/components/chip-input/ChipSelectionInput';
 import { RootState, useAppSelector } from '@/store/store';
 import useTags from '@/hooks/useTags';
+import colors from '@/constants/Colors';
 
 export default function TransactionEntry(props: ITransactionInfo) {
     const navigation = useNavigation();
@@ -140,3 +140,28 @@ export default function TransactionEntry(props: ITransactionInfo) {
         </PaperProvider>
     );
 }
+
+const transactionEntryStyles = StyleSheet.create({
+    container: {
+        paddingTop: StatusBarr.currentHeight || 0,
+        flex: 1,
+        gap: 16,
+        padding: 16,
+    },
+    commonStyles: {
+        margin: 'auto',
+        width: '75%',
+        marginBottom: 0,
+        marginTop: 0,
+    },
+    button: {
+        margin: 'auto',
+        width: '50%',
+        marginBottom: 0,
+        marginTop: 0,
+        backgroundColor: colors.fuchsia,
+    },
+    input: {},
+    dropdown: {},
+    textArea: {},
+});

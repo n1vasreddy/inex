@@ -47,9 +47,11 @@ const masterSetupStyles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        borderColor: colors.fuchsia,
         borderWidth: 1,
         borderRadius: 6,
         padding: 10,
         width: 200,
+        backgroundColor: colors.fuchsia,
     },
 });
