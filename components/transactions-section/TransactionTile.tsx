@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable, useColorScheme } from 'react-native';
 import { View } from '@/components/Themed';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { formatCurrency, formatDate } from '@/utils/utils';
@@ -7,6 +7,7 @@ import { ITransactionInfo } from '@/store/transactions';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import useTransactions from '@/hooks/useTransactions';
+import colors from '@/constants/Colors';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
@@ -26,13 +27,14 @@ export const TransactionTile = ({
 }: ITransactionTileProps) => {
     const { remove } = useTransactions();
     const [zIndex, setZIndex] = useState(-1);
+    const colorScheme = useColorScheme();
 
     const handleLongPress = () => {
         setZIndex(1);
     };
 
-    const handleDelete = () => {
-        remove(id);
+    const handleDelete = async () => {
+        await remove(id);
     };
 
     const handleEdit = () => {
@@ -55,27 +57,46 @@ export const TransactionTile = ({
         setZIndex(-1);
     };
 
+    const tileBackground = {
+        backgroundColor: colors[colorScheme ?? 'light'].tileBackground,
+    };
+
     return (
         <Pressable onLongPress={handleLongPress}>
             <View
                 style={[
+                    tileBackground,
                     transactionTileStyles.container,
                     { borderRightColor: color },
                 ]}
             >
-                <View style={transactionTileStyles.innerContainer}>
+                <View
+                    style={[
+                        tileBackground,
+                        transactionTileStyles.innerContainer,
+                    ]}
+                >
                     <Text style={transactionTileStyles.note}>{note}</Text>
                     <Text style={transactionTileStyles.amount}>
                         {formatCurrency(amount)}
                     </Text>
                 </View>
-                <View style={transactionTileStyles.innerContainer}>
+                <View
+                    style={[
+                        tileBackground,
+                        transactionTileStyles.innerContainer,
+                    ]}
+                >
                     <Text style={transactionTileStyles.dateTime}>
                         {formatDate(new Date(trxDate))}
                     </Text>
                 </View>
                 <View
-                    style={[transactionTileStyles.actionsContainer, { zIndex }]}
+                    style={[
+                        tileBackground,
+                        transactionTileStyles.actionsContainer,
+                        { zIndex },
+                    ]}
                 >
                     <Pressable
                         onPress={handleDelete}
@@ -126,17 +147,16 @@ const transactionTileStyles = StyleSheet.create({
         alignItems: 'center',
     },
     note: {
-        color: '#666',
-        fontSize: 12,
+        fontSize: 14,
+        fontWeight: '800',
     },
     amount: {
-        color: '#000',
         fontSize: 16,
         fontWeight: 'bold',
     },
     dateTime: {
-        color: '#999',
         fontSize: 12,
+        fontWeight: '700',
         marginTop: 5,
     },
     actionsContainer: {
