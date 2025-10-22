@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '@/store/store';
 import { useRouter } from 'expo-router';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, useColorScheme } from 'react-native';
 import { Avatar, IconButton, Button, useTheme } from 'react-native-paper';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { ITag } from '@/store/tags';
 import useTags from '@/hooks/useTags';
+import colors from '@/constants/Colors';
 
 export default function Tags() {
+    const colorScheme = useColorScheme();
     const router = useRouter();
     const tags: ITag[] = useAppSelector((state) => state.tags.data);
     const theme = useTheme();
@@ -26,11 +28,25 @@ export default function Tags() {
     };
 
     const renderItem = ({ item }: { item: ITag }) => (
-        <View style={styles.row}>
+        <View
+            style={[
+                {
+                    backgroundColor:
+                        colors[colorScheme ?? 'light'].tileBackground,
+                },
+                styles.row,
+            ]}
+        >
             <Avatar.Text
                 size={36}
                 label={item.tagEmoji}
-                style={styles.avatar}
+                style={[
+                    {
+                        backgroundColor:
+                            colors[colorScheme ?? 'light'].avatarBackground,
+                    },
+                    styles.avatar,
+                ]}
             />
             <Text variant="titleMedium" style={styles.text}>
                 {item.tagName}
@@ -47,8 +63,25 @@ export default function Tags() {
     );
 
     return (
-        <View style={styles.container}>
-            <Button mode="contained" onPress={handleAdd} style={styles.addBtn}>
+        <View
+            style={[
+                {
+                    backgroundColor: colors[colorScheme ?? 'light'].background,
+                },
+                styles.container,
+            ]}
+        >
+            <Button
+                mode="contained"
+                onPress={handleAdd}
+                color={colors[colorScheme ?? 'light'].text}
+                style={[
+                    {
+                        backgroundColor: colors.fuchsia,
+                    },
+                    styles.addBtn,
+                ]}
+            >
                 Add New Tag
             </Button>
             <FlatList
@@ -66,7 +99,6 @@ const styles = StyleSheet.create({
     container: {
         padding: 16,
         flex: 1,
-        backgroundColor: '#fff',
     },
     addBtn: {
         marginBottom: 24,
@@ -74,14 +106,12 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fafafa',
         paddingVertical: 12,
         borderRadius: 8,
         paddingHorizontal: 12,
         elevation: 1,
     },
     avatar: {
-        backgroundColor: '#e0e0e0',
         marginRight: 16,
     },
     text: {
