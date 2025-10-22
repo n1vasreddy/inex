@@ -6,6 +6,9 @@ export const labels = {
     category: 'Category',
     note: 'Note',
     submit: 'Submit',
+    tagName: 'Tag Name',
+    tagEmoji: 'Tag Emoji',
+    addTag: 'Add Tag',
 };
 
 export const options = {
