@@ -5,7 +5,7 @@ import { View } from '@/components/Themed';
 import { DropdownField } from '@/components/dropdown-field/DropdownField';
 import TextInputField from '../text-input-field/TextInputField';
 import { labels, options } from '@/constants/constants';
-import CustomButton from '@/components/custom-button/CustomButton';
+import Button from '@/components/custom-button/CustomButton';
 import { Provider as PaperProvider } from 'react-native-paper';
 import DatePickerField from '@/components/date-picker-field/DatePickerField';
 import { TextInput } from 'react-native-paper';
@@ -126,13 +126,14 @@ export default function TransactionEntry(props: ITransactionInfo) {
                     trackColor={options.transactionTypeTrackColor}
                 />
 
-                <CustomButton
+                <Button
                     onPress={handleSubmit}
+                    labelStyle={{ color: colors.babyBlue }}
                     icon="arrow-right"
                     style={transactionEntryStyles.button}
                 >
                     {labels.submit}
-                </CustomButton>
+                </Button>
 
                 {/* Use a light status bar on iOS to account for the black space above the modal */}
                 <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
