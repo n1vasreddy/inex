@@ -20,13 +20,28 @@ const MasterSetup = () => {
                 ]}
             >
                 <Link href={'/balances'} style={masterSetupStyles.linkStyle}>
-                    <Text variant="titleMedium">Manage Balances</Text>
+                    <Text
+                        variant="titleMedium"
+                        style={masterSetupStyles.buttonColor}
+                    >
+                        Manage Balances
+                    </Text>
                 </Link>
                 <Link href={'/accounts'} style={masterSetupStyles.linkStyle}>
-                    <Text variant="titleMedium">Payment Methods</Text>
+                    <Text
+                        variant="titleMedium"
+                        style={masterSetupStyles.buttonColor}
+                    >
+                        Payment Methods
+                    </Text>
                 </Link>
                 <Link href={'/tags'} style={masterSetupStyles.linkStyle}>
-                    <Text variant="titleMedium">Manage Categories</Text>
+                    <Text
+                        variant="titleMedium"
+                        style={masterSetupStyles.buttonColor}
+                    >
+                        Manage Categories
+                    </Text>
                 </Link>
             </SafeAreaView>
         </SafeAreaProvider>
@@ -42,6 +57,9 @@ const masterSetupStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 24,
+    },
+    buttonColor: {
+        color: colors.babyBlue,
     },
     linkStyle: {
         display: 'flex',

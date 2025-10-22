@@ -119,7 +119,7 @@ function RootLayoutNav() {
                     visible={true}
                     animateFrom={'right'}
                     iconMode={'static'}
-                    color={colors[colorScheme ?? 'light'].text}
+                    color={colors.babyBlue}
                     style={{
                         bottom: 86,
                         right: 16,

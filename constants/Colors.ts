@@ -9,6 +9,7 @@ const colors = {
         tabIconDefault,
         tabIconSelected: tintColor,
         tileBackground: '#ECF1F2',
+        avatarBackground: '#e0e0e0',
     },
     dark: {
         text: '#D4F1F4',
@@ -17,8 +18,10 @@ const colors = {
         tabIconDefault,
         tabIconSelected: tintColor,
         tileBackground: '#05445E',
+        avatarBackground: '#41729F',
     },
     fuchsia: '#FB4570',
+    babyBlue: '#ECF1F2',
 } as any;
 
 export default colors;
