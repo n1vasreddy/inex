@@ -1,9 +1,16 @@
 import { formatDate } from '@/utils/utils';
 import React, { useState } from 'react';
-import { View, StyleSheet, StyleProp, Pressable } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    StyleProp,
+    Pressable,
+    useColorScheme,
+} from 'react-native';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { DatePickerModal, TimePickerModal } from 'react-native-paper-dates';
+import colors from '@/constants/Colors';
 
 interface IDatePickerFieldProps {
     label: string;
@@ -15,6 +22,7 @@ interface IDatePickerFieldProps {
 type ITimePicked = { hours: number; minutes: number };
 
 export default function DatePickerField(props: IDatePickerFieldProps) {
+    const colorScheme = useColorScheme();
     const [open, setOpen] = useState(false);
     const [visible, setVisible] = useState(false);
 
@@ -48,9 +56,13 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
         setVisible(false);
     }, [setVisible]);
 
+    const backgroundColor = {
+        backgroundColor: colors[colorScheme ?? 'light'].background,
+    };
+
     return (
         <>
-            <View style={[styles.container, props?.style]}>
+            <View style={[backgroundColor, styles.container, props?.style]}>
                 <View
                     style={[
                         styles.labelContainer,
@@ -59,11 +71,15 @@ export default function DatePickerField(props: IDatePickerFieldProps) {
                 >
                     <Text style={styles.label}>{props.label}</Text>
                     <View style={styles.topHalf} />
-                    <View style={styles.bottomHalf} />
+                    <View style={[backgroundColor, styles.bottomHalf]} />
                 </View>
                 <Text>{formatDate(props.trxDate)}</Text>
                 <Pressable onPress={() => setOpen(true)} style={styles.icon}>
-                    <EvilIcons name="calendar" size={34} color="black" />
+                    <EvilIcons
+                        name="calendar"
+                        size={34}
+                        color={colors.fuchsia}
+                    />
                 </Pressable>
             </View>
             <DatePickerModal
@@ -95,7 +111,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderColor: '#777',
-        backgroundColor: '#fff',
         borderRadius: 4,
         height: 50,
     },
@@ -110,7 +125,6 @@ const styles = StyleSheet.create({
         zIndex: 1,
         position: 'absolute',
         left: 4,
-        color: '#444',
     },
     topHalf: {
         height: '30%',
@@ -121,7 +135,6 @@ const styles = StyleSheet.create({
         height: '70%',
         width: '100%',
         flex: 1,
-        backgroundColor: '#fff',
     },
     icon: {
         height: 34,
