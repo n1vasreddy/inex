@@ -1,8 +1,9 @@
 import { ITag } from '@/store/tags';
 import React from 'react';
-import { View, StyleSheet, StyleProp } from 'react-native';
+import { View, StyleSheet, StyleProp, useColorScheme } from 'react-native';
 import { Chip } from 'react-native-paper';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
+import colors from '@/constants/Colors';
 
 interface IChipSelectionInputProps {
     label: string;
@@ -13,6 +14,8 @@ interface IChipSelectionInputProps {
 }
 
 const ChipSelectionInput = (props: IChipSelectionInputProps) => {
+    const colorScheme = useColorScheme() ?? 'light';
+
     const handleChipSelect = (chipId: string) => {
         props?.onChange &&
             props.onChange((prevChips: string[]) => {
@@ -31,8 +34,14 @@ const ChipSelectionInput = (props: IChipSelectionInputProps) => {
                         key={chip.id}
                         style={
                             props?.value?.includes(chip.id)
-                                ? styles.selectedChip
-                                : styles.unselectedChip
+                                ? {
+                                      backgroundColor:
+                                          colors[colorScheme].selectedChip,
+                                  }
+                                : {
+                                      backgroundColor:
+                                          colors[colorScheme].unselectedChip,
+                                  }
                         }
                         onPress={() => handleChipSelect(chip.id)}
                     >
@@ -53,12 +62,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         flexDirection: 'row',
         gap: 4,
-    },
-    selectedChip: {
-        backgroundColor: '#e6f5fc',
-    },
-    unselectedChip: {
-        backgroundColor: '#fff',
     },
 });
 

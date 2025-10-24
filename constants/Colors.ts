@@ -10,6 +10,8 @@ const colors = {
         tabIconSelected: tintColor,
         tileBackground: '#ECF1F2',
         avatarBackground: '#e0e0e0',
+        selectedChip: '#7CF3A0',
+        unselectedChip: '#e6f5fc',
     },
     dark: {
         text: '#D4F1F4',
@@ -19,6 +21,8 @@ const colors = {
         tabIconSelected: tintColor,
         tileBackground: '#05445E',
         avatarBackground: '#41729F',
+        selectedChip: '#02894B',
+        unselectedChip: '#2F5233',
     },
     fuchsia: '#FB4570',
     babyBlue: '#ECF1F2',
