@@ -78,36 +78,43 @@ function RootLayoutNav() {
                     <Stack.Screen
                         name="transactionEntry"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Transaction Entry', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Transaction Entry',
                         }}
                     />
                     <Stack.Screen
                         name="balances"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Manage Balances', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Manage Balances',
                         }}
                     />
                     <Stack.Screen
                         name="accounts"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Payment Methods', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Accounts',
+                        }}
+                    />
+                    <Stack.Screen
+                        name="addAccount"
+                        options={{
+                            presentation: 'modal',
+                            title: 'Add Account',
                         }}
                     />
                     <Stack.Screen
                         name="tags"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Manage Categories', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Manage Categories',
                         }}
                     />
                     <Stack.Screen
                         name="newTag"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Add New Tag', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Add New Tag',
                         }}
                     />
                 </Stack>
