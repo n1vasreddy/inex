@@ -9,6 +9,8 @@ export const labels = {
     tagName: 'Tag Name',
     tagEmoji: 'Tag Emoji',
     addTag: 'Add Tag',
+    addTagButton: 'Add New Tag',
+    addAccount: 'Add Account',
 };
 
 export const options = {
