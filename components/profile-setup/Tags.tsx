@@ -7,6 +7,7 @@ import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { ITag } from '@/store/tags';
 import useTags from '@/hooks/useTags';
 import colors from '@/constants/Colors';
+import { labels } from '@/constants/constants';
 
 export default function Tags() {
     const colorScheme = useColorScheme();
@@ -82,7 +83,7 @@ export default function Tags() {
                     styles.addBtn,
                 ]}
             >
-                Add New Tag
+                {labels.addTagButton}
             </Button>
             <FlatList
                 data={tags}
