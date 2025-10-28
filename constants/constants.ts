@@ -11,6 +11,10 @@ export const labels = {
     addTag: 'Add Tag',
     addTagButton: 'Add New Tag',
     addAccount: 'Add Account',
+    label: 'Label',
+    value: 'Value',
+    accountType: 'Account Type',
+    balance: 'Balance',
 };
 
 export const options = {
