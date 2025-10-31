@@ -4,7 +4,7 @@ import TextInput from '@/components/text-input-field/TextInputField';
 import Button from '@/components/custom-button/CustomButton';
 import { PaperProvider } from 'react-native-paper';
 import RadioButtonInput from '@/components/radio-group-input/RadioButtonInput';
-import { labels } from '@/constants/constants';
+import { labels, options } from '@/constants/constants';
 import colors from '@/constants/Colors';
 
 const AddAccount = () => {
@@ -13,12 +13,6 @@ const AddAccount = () => {
     const [value, setValue] = useState('');
     const [type, setType] = useState('');
     const [balance, setBalance] = useState('');
-
-    const options = [
-        { label: 'Credit', value: 'credit' },
-        { label: 'Standard', value: 'standard' },
-        { label: 'Brokerage', value: 'brokerage' },
-    ];
 
     const handleSubmit = () => {
         // Handle form submission logic here
@@ -45,7 +39,7 @@ const AddAccount = () => {
                     onChangeText={(text) => setValue(text)}
                 />
                 <RadioButtonInput
-                    options={options}
+                    options={options.accountTypeOptions}
                     onValueChange={(value) => setType(value)}
                     value={type}
                     label={labels.accountType}
