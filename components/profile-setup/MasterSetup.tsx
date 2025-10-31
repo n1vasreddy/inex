@@ -4,6 +4,7 @@ import { Link } from 'expo-router';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { StyleSheet, useColorScheme } from 'react-native';
 import colors from '@/constants/Colors';
+import { labels } from '@/constants/constants';
 
 const MasterSetup = () => {
     const colorScheme = useColorScheme();
@@ -19,20 +20,12 @@ const MasterSetup = () => {
                     masterSetupStyles.containerStyle,
                 ]}
             >
-                <Link href={'/balances'} style={masterSetupStyles.linkStyle}>
-                    <Text
-                        variant="titleMedium"
-                        style={masterSetupStyles.buttonColor}
-                    >
-                        Manage Balances
-                    </Text>
-                </Link>
                 <Link href={'/accounts'} style={masterSetupStyles.linkStyle}>
                     <Text
                         variant="titleMedium"
                         style={masterSetupStyles.buttonColor}
                     >
-                        Payment Methods
+                        {labels.accounts}
                     </Text>
                 </Link>
                 <Link href={'/tags'} style={masterSetupStyles.linkStyle}>
@@ -40,7 +33,7 @@ const MasterSetup = () => {
                         variant="titleMedium"
                         style={masterSetupStyles.buttonColor}
                     >
-                        Manage Categories
+                        {labels.tags}
                     </Text>
                 </Link>
             </SafeAreaView>

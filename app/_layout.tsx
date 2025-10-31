@@ -83,13 +83,6 @@ function RootLayoutNav() {
                         }}
                     />
                     <Stack.Screen
-                        name="balances"
-                        options={{
-                            presentation: 'modal',
-                            title: 'Manage Balances',
-                        }}
-                    />
-                    <Stack.Screen
                         name="accounts"
                         options={{
                             presentation: 'modal',
