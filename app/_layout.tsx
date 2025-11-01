@@ -14,7 +14,11 @@ import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
 import { useColorScheme } from 'react-native';
-import { tagsTableSchema, transactionsTableSchema } from '@/db/schema';
+import {
+    accountsTableSchema,
+    tagsTableSchema,
+    transactionsTableSchema,
+} from '@/db/schema';
 import colors from '@/constants/Colors';
 
 export {
@@ -40,6 +44,7 @@ export default function RootLayout() {
         (async () => {
             await setupDatabase(transactionsTableSchema);
             await setupDatabase(tagsTableSchema);
+            await setupDatabase(accountsTableSchema);
         })();
     }, []);
 
