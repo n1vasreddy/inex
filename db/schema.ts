@@ -18,6 +18,15 @@ export const tagsTableSchema = `
     );
 `;
 
+export const accountsTableSchema = `
+    CREATE TABLE IF NOT EXISTS tags (
+        value TEXT PRIMARY KEY NOT NULL,
+        label TEXT NOT NULL,
+        type TEXT NOT NULL,
+        balance REAL NOT NULL DEFAULT 0
+    );
+`;
+
 export const getAllTransactionsQuery = 'SELECT * FROM transactions';
 
 export const postTransactionQuery =
