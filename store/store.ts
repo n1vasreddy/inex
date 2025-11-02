@@ -6,10 +6,12 @@ import {
 } from 'react-redux';
 import transactionsReducer from './transactions';
 import tagsReducer from './tags';
+import accountsReducer from './accounts';
 
 const rootReducer = {
     transactions: transactionsReducer,
     tags: tagsReducer,
+    accounts: accountsReducer,
 };
 
 const store = configureStore({

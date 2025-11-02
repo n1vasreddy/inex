@@ -5,13 +5,7 @@ import colors from '@/constants/Colors';
 import { AccountTile } from './AccountTile';
 import { useRouter } from 'expo-router';
 import { labels } from '@/constants/constants';
-
-export interface IAccountInfo {
-    label: string;
-    value: string;
-    type: string;
-    balance: number;
-}
+import { IAccountInfo } from '@/store/accounts';
 
 const Accounts = () => {
     const colorScheme = useColorScheme();
