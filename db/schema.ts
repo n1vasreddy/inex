@@ -19,7 +19,7 @@ export const tagsTableSchema = `
 `;
 
 export const accountsTableSchema = `
-    CREATE TABLE IF NOT EXISTS tags (
+    CREATE TABLE IF NOT EXISTS accounts (
         value TEXT PRIMARY KEY NOT NULL,
         label TEXT NOT NULL,
         type TEXT NOT NULL,
@@ -43,3 +43,5 @@ export const postTagQuery =
     'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
 
 export const deleteTagQuery = 'DELETE FROM tags WHERE id = ?';
+
+export const getAllAccountsQuery = 'SELECT * FROM accounts';
