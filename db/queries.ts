@@ -4,12 +4,14 @@ import { ITag } from '@/store/tags';
 import {
     deleteTagQuery,
     deleteTransactionQuery,
+    getAllAccountsQuery,
     getAllTagsQuery,
     getAllTransactionsQuery,
     postTagQuery,
     postTransactionQuery,
     updateTransactionQuery,
 } from './schema';
+import { IAccountInfo } from '@/store/accounts';
 
 export const getTransactions = async (): Promise<ITransactionInfo[]> => {
     try {
@@ -93,6 +95,16 @@ export const deleteTag = async (id: string) => {
         await db.runAsync(deleteTagQuery, [id]);
     } catch (error) {
         console.error('Error deleting tag:', error);
+        return [];
+    }
+};
+
+export const getAccounts = async (): Promise<IAccountInfo[]> => {
+    try {
+        const db = await openDatabase();
+        return await db.getAllAsync(getAllAccountsQuery);
+    } catch (error) {
+        console.error('Error fetching accounts info:', error);
         return [];
     }
 };
