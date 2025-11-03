@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { getTags } from '@/db/queries';
+import { getAccounts } from '@/db/queries';
 
 export interface IAccountInfo {
     label: string;
@@ -38,7 +38,7 @@ export const accountsSlice = createSlice({
 export const loadAccounts = createAsyncThunk(
     'accounts/loadAccounts',
     async (): Promise<IAccountInfo[]> => {
-        return await getTags();
+        return await getAccounts();
     },
 );
 
