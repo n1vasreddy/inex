@@ -45,3 +45,6 @@ export const postTagQuery =
 export const deleteTagQuery = 'DELETE FROM tags WHERE id = ?';
 
 export const getAllAccountsQuery = 'SELECT * FROM accounts';
+
+export const postAccountQuery =
+    'INSERT INTO accounts (value, label, type, balance) VALUES (?, ?, ?, ?)';
