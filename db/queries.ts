@@ -7,6 +7,7 @@ import {
     getAllAccountsQuery,
     getAllTagsQuery,
     getAllTransactionsQuery,
+    postAccountQuery,
     postTagQuery,
     postTransactionQuery,
     updateTransactionQuery,
@@ -105,6 +106,21 @@ export const getAccounts = async (): Promise<IAccountInfo[]> => {
         return await db.getAllAsync(getAllAccountsQuery);
     } catch (error) {
         console.error('Error fetching accounts info:', error);
+        return [];
+    }
+};
+
+export const addAccount = async (accountInfo: IAccountInfo) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(postAccountQuery, [
+            accountInfo.value,
+            accountInfo.label,
+            accountInfo.type,
+            accountInfo.balance,
+        ]);
+    } catch (error) {
+        console.error('Error adding account:', error);
         return [];
     }
 };
