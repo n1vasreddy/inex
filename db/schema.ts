@@ -48,3 +48,6 @@ export const getAllAccountsQuery = 'SELECT * FROM accounts';
 
 export const postAccountQuery =
     'INSERT INTO accounts (value, label, type, balance) VALUES (?, ?, ?, ?)';
+
+export const updateAccountInfoQuery =
+    'UPDATE accounts SET label = ?, balance = ? WHERE value = ?';
