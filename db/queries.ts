@@ -2,6 +2,7 @@ import { openDatabase } from './database';
 import { ITransactionInfo } from '@/store/transactions';
 import { ITag } from '@/store/tags';
 import {
+    deleteAccountInfoQuery,
     deleteTagQuery,
     deleteTransactionQuery,
     getAllAccountsQuery,
@@ -136,6 +137,16 @@ export const updateAccountInfo = async (accountInfo: IAccountInfo) => {
         ]);
     } catch (error) {
         console.error('Error updating account info:', error);
+        return [];
+    }
+};
+
+export const deleteAccountInfo = async (value: string) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(deleteAccountInfoQuery, [value]);
+    } catch (error) {
+        console.error('Error deleting account info:', error);
         return [];
     }
 };
