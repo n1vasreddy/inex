@@ -51,3 +51,5 @@ export const postAccountQuery =
 
 export const updateAccountInfoQuery =
     'UPDATE accounts SET label = ?, balance = ? WHERE value = ?';
+
+export const deleteAccountInfoQuery = 'DELETE FROM accounts WHERE value = ?';
