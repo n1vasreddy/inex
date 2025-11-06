@@ -1,6 +1,6 @@
 import { AppDispatch, useAppDispatch } from '@/store/store';
-import { loadAccounts } from '@/store/accounts';
-import {} from '@/db/queries';
+import { IAccountInfo, loadAccounts } from '@/store/accounts';
+import { addAccount, deleteAccountInfo, updateAccountInfo } from '@/db/queries';
 
 export default function useTransactions() {
     const dispatch: AppDispatch = useAppDispatch();
@@ -10,13 +10,16 @@ export default function useTransactions() {
     };
 
     return {
-        add: async (trx: any) => {
+        addAccount: async (accountInfo: IAccountInfo) => {
+            await addAccount(accountInfo);
             await refresh();
         },
-        update: async (trx: any) => {
+        updateAccountInfo: async (accountInfo: IAccountInfo) => {
+            await updateAccountInfo(accountInfo);
             await refresh();
         },
-        remove: async (id: string) => {
+        deleteAccount: async (value: string) => {
+            await deleteAccountInfo(value);
             await refresh();
         },
         refresh,
