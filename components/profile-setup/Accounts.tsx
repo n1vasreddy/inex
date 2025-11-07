@@ -6,19 +6,12 @@ import { AccountTile } from './AccountTile';
 import { useRouter } from 'expo-router';
 import { labels } from '@/constants/constants';
 import { IAccountInfo } from '@/store/accounts';
+import { RootState, useAppSelector } from '@/store/store';
 
 const Accounts = () => {
     const colorScheme = useColorScheme();
     const router = useRouter();
-
-    const data = [
-        {
-            label: 'HDFC Debit Card',
-            value: 'hdfc-main-account',
-            type: 'standard',
-            balance: 899000,
-        },
-    ];
+    const accounts = useAppSelector((state: RootState) => state.accounts.data);
 
     const handleAdd = () => {
         router.navigate('./addAccount');
@@ -41,7 +34,7 @@ const Accounts = () => {
                 {labels.addAccount}
             </Button>
             <FlatList
-                data={data}
+                data={accounts}
                 renderItem={(props: { item: IAccountInfo }) => (
                     <AccountTile {...props.item} />
                 )}
