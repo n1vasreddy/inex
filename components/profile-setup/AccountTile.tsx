@@ -6,7 +6,8 @@ import { formatCurrency } from '@/utils/utils';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import colors from '@/constants/Colors';
-import { IAccountInfo } from './Accounts';
+import { IAccountInfo } from '@/store/accounts';
+import useAccounts from '@/hooks/useAccounts';
 
 export interface IAccountTileProps extends IAccountInfo {}
 
@@ -20,12 +21,15 @@ export const AccountTile = ({
 }: IAccountTileProps) => {
     const colorScheme = useColorScheme();
     const [zIndex, setZIndex] = useState(-1);
+    const { deleteAccount } = useAccounts();
 
     const handleLongPress = () => {
         setZIndex(1);
     };
 
-    const handleDelete = async () => {};
+    const handleDelete = async () => {
+        await deleteAccount(value);
+    };
 
     const handleEdit = () => {
         router.push({
