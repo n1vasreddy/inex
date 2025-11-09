@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FlatList, Pressable, useColorScheme, View } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { TransactionTile, ITransactionTileProps } from './TransactionTile';
 import { RootState, useAppSelector } from '@/store/store';
 import { options } from '@/constants/constants';

@@ -15,22 +15,10 @@ interface ITransactionState {
     data: ITransactionInfo[];
 }
 
-interface IActionTransactionEntry {
-    type: string;
-    payload: ITransactionInfo;
-}
-
 export const transactionsSlice = createSlice({
     name: 'transactions',
     initialState: { data: [] } as ITransactionState,
-    reducers: {
-        transactionEntry: (
-            state: ITransactionState,
-            action: IActionTransactionEntry,
-        ) => {
-            state.data = [...state.data, action.payload];
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
             loadTransactions.fulfilled,
@@ -48,5 +36,4 @@ export const loadTransactions = createAsyncThunk(
     },
 );
 
-export const { transactionEntry } = transactionsSlice.actions;
 export default transactionsSlice.reducer;
