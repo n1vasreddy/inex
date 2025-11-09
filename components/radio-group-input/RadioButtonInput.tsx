@@ -5,7 +5,8 @@ import { StyledText as Text } from '@/components/styled-text/StyledText';
 
 type IOption = { label: string; value: string };
 
-interface IRadioButtonInputProps {
+interface IRadioButtonInputProps
+    extends React.ComponentProps<typeof RadioButton> {
     value: string;
     onValueChange: (value: string) => void;
     options: IOption[];

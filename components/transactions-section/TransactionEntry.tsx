@@ -23,6 +23,7 @@ import colors from '@/constants/Colors';
 export default function TransactionEntry(props: ITransactionInfo) {
     const navigation = useNavigation();
     const tagsData = useAppSelector((state: RootState) => state.tags.data);
+    const accounts = useAppSelector((state: RootState) => state.accounts.data);
     const [isUpdate, setIsUpdate] = useState(false);
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
@@ -83,7 +84,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
                     label={labels.paymentMethod}
                     value={paymentMethod}
                     onSelect={setPaymentMethod}
-                    options={options.paymentMethods}
+                    options={accounts}
                     style={transactionEntryStyles.commonStyles}
                 />
 
