@@ -120,6 +120,7 @@ export const addAccount = async (accountInfo: IAccountInfo) => {
             accountInfo.label,
             accountInfo.type,
             accountInfo.balance,
+            accountInfo.isDefault,
         ]);
     } catch (error) {
         console.error('Error adding account:', error);
@@ -133,6 +134,7 @@ export const updateAccountInfo = async (accountInfo: IAccountInfo) => {
         await db.runAsync(updateAccountInfoQuery, [
             accountInfo.label,
             accountInfo.balance,
+            accountInfo.isDefault,
             accountInfo.value,
         ]);
     } catch (error) {

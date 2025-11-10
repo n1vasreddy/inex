@@ -6,7 +6,7 @@ import { StyledText as Text } from '@/components/styled-text/StyledText';
 interface IToggleInput extends ComponentProps<typeof Switch> {
     label: string;
     style?: StyleProp<any>;
-    trackColor: { true: string; false: string };
+    trackColor?: { true: string; false: string };
 }
 
 const ToggleInput = (props: IToggleInput) => {

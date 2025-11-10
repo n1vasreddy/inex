@@ -17,6 +17,7 @@ export const labels = {
     balance: 'Balance',
     accounts: 'Accounts',
     tags: 'Manage Tags',
+    default: 'Default',
 };
 
 export const options = {

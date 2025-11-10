@@ -6,6 +6,7 @@ export interface IAccountInfo {
     value: string;
     type: string;
     balance: number;
+    isDefault: string;
 }
 
 interface IAccountsInfo {

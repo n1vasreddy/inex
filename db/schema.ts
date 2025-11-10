@@ -23,7 +23,8 @@ export const accountsTableSchema = `
         value TEXT PRIMARY KEY NOT NULL,
         label TEXT NOT NULL,
         type TEXT NOT NULL,
-        balance REAL NOT NULL DEFAULT 0
+        balance REAL NOT NULL DEFAULT 0,
+        isDefault TEXT NOT NULL
     );
 `;
 
@@ -47,9 +48,9 @@ export const deleteTagQuery = 'DELETE FROM tags WHERE id = ?';
 export const getAllAccountsQuery = 'SELECT * FROM accounts';
 
 export const postAccountQuery =
-    'INSERT INTO accounts (value, label, type, balance) VALUES (?, ?, ?, ?)';
+    'INSERT INTO accounts (value, label, type, balance, isDefault) VALUES (?, ?, ?, ?, ?)';
 
 export const updateAccountInfoQuery =
-    'UPDATE accounts SET label = ?, balance = ? WHERE value = ?';
+    'UPDATE accounts SET label = ?, balance = ?, isDefault = ? WHERE value = ?';
 
 export const deleteAccountInfoQuery = 'DELETE FROM accounts WHERE value = ?';

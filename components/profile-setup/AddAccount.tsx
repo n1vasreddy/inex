@@ -4,6 +4,7 @@ import TextInput from '@/components/text-input-field/TextInputField';
 import Button from '@/components/custom-button/CustomButton';
 import { PaperProvider } from 'react-native-paper';
 import RadioButtonInput from '@/components/radio-group-input/RadioButtonInput';
+import ToggleInput from '@/components/toggle-input/ToggleInput';
 import { labels, options } from '@/constants/constants';
 import colors from '@/constants/Colors';
 import { IAccountInfo } from '@/store/accounts';
@@ -18,6 +19,7 @@ const AddAccount = (props: IAccountInfo) => {
     const [value, setValue] = useState('');
     const [type, setType] = useState('');
     const [balance, setBalance] = useState('');
+    const [isDefault, setIsDefault] = useState('false');
     const { addAccount, updateAccountInfo } = useAccounts();
 
     useEffect(() => {
@@ -26,6 +28,7 @@ const AddAccount = (props: IAccountInfo) => {
             props?.balance && setBalance(props.balance.toString());
             props?.type && setType(props.type);
             props?.label && setLabel(props.label);
+            props?.isDefault && setIsDefault(props.isDefault);
         }
     }, [props?.value]);
 
@@ -35,6 +38,7 @@ const AddAccount = (props: IAccountInfo) => {
             value,
             type,
             balance: Number(balance),
+            isDefault: isDefault,
         };
         if (isUpdate) {
             await updateAccountInfo(payload);
@@ -59,12 +63,14 @@ const AddAccount = (props: IAccountInfo) => {
                     value={label}
                     onChangeText={(text) => setLabel(text)}
                 />
+
                 <TextInput
                     label={labels.value}
                     value={value}
                     disabled={isUpdate}
                     onChangeText={(text) => setValue(text)}
                 />
+
                 <RadioButtonInput
                     options={options.accountTypeOptions}
                     disabled={isUpdate}
@@ -72,11 +78,21 @@ const AddAccount = (props: IAccountInfo) => {
                     value={type}
                     label={labels.accountType}
                 />
+
                 <TextInput
                     label={labels.balance}
                     value={balance}
                     onChangeText={(text) => setBalance(text)}
                 />
+
+                <ToggleInput
+                    value={isDefault === 'true' ? true : false}
+                    onValueChange={(value: boolean) =>
+                        setIsDefault(String(value))
+                    }
+                    label={labels.default}
+                />
+
                 <Button
                     mode="contained"
                     onPress={handleSubmit}
