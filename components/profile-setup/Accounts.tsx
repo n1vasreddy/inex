@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, useColorScheme, FlatList } from 'react-native';
 import { Button } from 'react-native-paper';
 import colors from '@/constants/Colors';
@@ -7,11 +7,17 @@ import { useRouter } from 'expo-router';
 import { labels } from '@/constants/constants';
 import { IAccountInfo } from '@/store/accounts';
 import { RootState, useAppSelector } from '@/store/store';
+import useAccounts from '@/hooks/useAccounts';
 
 const Accounts = () => {
     const colorScheme = useColorScheme();
     const router = useRouter();
     const accounts = useAppSelector((state: RootState) => state.accounts.data);
+    const { refresh } = useAccounts();
+
+    useEffect(() => {
+        if (!accounts.length) refresh();
+    }, []);
 
     const handleAdd = () => {
         router.navigate('./addAccount');
