@@ -19,6 +19,7 @@ import ChipSelectionInput from '@/components/chip-input/ChipSelectionInput';
 import { RootState, useAppSelector } from '@/store/store';
 import useTags from '@/hooks/useTags';
 import colors from '@/constants/Colors';
+import useAccounts from '@/hooks/useAccounts';
 
 export default function TransactionEntry(props: ITransactionInfo) {
     const navigation = useNavigation();
@@ -28,15 +29,28 @@ export default function TransactionEntry(props: ITransactionInfo) {
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState<boolean>(false);
     const [trxDate, setTrxDate] = useState(new Date());
-    const [paymentMethod, setPaymentMethod] = useState<any>('hdfc3');
+    const [paymentMethod, setPaymentMethod] = useState<string>('');
     const [category, setCategory] = useState<string[]>([]);
     const [note, setNote] = useState('');
     const { add, update } = useTransactions();
     const { refreshTags } = useTags();
+    const { refreshAccounts } = useAccounts();
 
     useEffect(() => {
+        // Load tags in empty
         if (!tagsData.length) refreshTags();
+        if (!accounts.length) refreshAccounts();
     }, []);
+
+    useEffect(() => {
+        // Set default payment method
+        if (accounts.length) {
+            const defaultAccount = accounts.find(
+                (account) => account.isDefault === 'true',
+            );
+            defaultAccount && setPaymentMethod(defaultAccount.value);
+        }
+    }, [accounts]);
 
     useEffect(() => {
         if (props?.id) {

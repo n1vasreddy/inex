@@ -5,23 +5,23 @@ import { addAccount, deleteAccountInfo, updateAccountInfo } from '@/db/queries';
 export default function useTransactions() {
     const dispatch: AppDispatch = useAppDispatch();
 
-    const refresh = async () => {
+    const refreshAccounts = async () => {
         await dispatch(loadAccounts());
     };
 
     return {
         addAccount: async (accountInfo: IAccountInfo) => {
             await addAccount(accountInfo);
-            await refresh();
+            await refreshAccounts();
         },
         updateAccountInfo: async (accountInfo: IAccountInfo) => {
             await updateAccountInfo(accountInfo);
-            await refresh();
+            await refreshAccounts();
         },
         deleteAccount: async (value: string) => {
             await deleteAccountInfo(value);
-            await refresh();
+            await refreshAccounts();
         },
-        refresh,
+        refreshAccounts,
     };
 }

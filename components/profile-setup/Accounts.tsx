@@ -13,10 +13,10 @@ const Accounts = () => {
     const colorScheme = useColorScheme();
     const router = useRouter();
     const accounts = useAppSelector((state: RootState) => state.accounts.data);
-    const { refresh } = useAccounts();
+    const { refreshAccounts } = useAccounts();
 
     useEffect(() => {
-        if (!accounts.length) refresh();
+        if (!accounts.length) refreshAccounts();
     }, []);
 
     const handleAdd = () => {
