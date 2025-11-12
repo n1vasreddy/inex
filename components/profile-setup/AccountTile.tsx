@@ -6,6 +6,7 @@ import { formatCurrency } from '@/utils/utils';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import colors from '@/constants/Colors';
+import { AccountType } from '@/constants/constants';
 import { IAccountInfo } from '@/store/accounts';
 import useAccounts from '@/hooks/useAccounts';
 
@@ -18,6 +19,7 @@ export const AccountTile = ({
     value,
     type,
     balance,
+    isDefault,
 }: IAccountTileProps) => {
     const colorScheme = useColorScheme();
     const [zIndex, setZIndex] = useState(-1);
@@ -39,6 +41,7 @@ export const AccountTile = ({
                 value,
                 type,
                 balance,
+                isDefault,
             },
         });
         setZIndex(-1);
@@ -55,9 +58,9 @@ export const AccountTile = ({
     return (
         <Pressable onLongPress={handleLongPress}>
             <View style={[tileBackground, accountTileStyles.container]}>
-                <Text
-                    style={accountTileStyles.label}
-                >{`${label} (${type})`}</Text>
+                <Text style={accountTileStyles.label}>{`${label} (${
+                    AccountType[type as keyof typeof AccountType]
+                })`}</Text>
                 <Text style={accountTileStyles.balance}>
                     {formatCurrency(balance)}
                 </Text>

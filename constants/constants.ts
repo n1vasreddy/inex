@@ -43,3 +43,9 @@ export enum TransactionType {
     Debit = 'Debit',
     Credit = 'Credit',
 }
+
+export enum AccountType {
+    standard = 'Standard',
+    credit = 'Credit',
+    brokerage = 'Brokerage',
+}
