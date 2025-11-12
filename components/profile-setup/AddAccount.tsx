@@ -67,13 +67,11 @@ const AddAccount = (props: IAccountInfo) => {
                 <TextInput
                     label={labels.value}
                     value={value}
-                    disabled={isUpdate}
                     onChangeText={(text) => setValue(text)}
                 />
 
                 <RadioButtonInput
                     options={options.accountTypeOptions}
-                    disabled={isUpdate}
                     onValueChange={(value) => setType(value)}
                     value={type}
                     label={labels.accountType}
