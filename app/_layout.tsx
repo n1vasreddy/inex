@@ -13,7 +13,7 @@ import { AnimatedFAB } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
-import { useColorScheme } from 'react-native';
+import { Appearance, useColorScheme } from 'react-native';
 import {
     accountsTableSchema,
     tagsTableSchema,
@@ -41,6 +41,7 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
+        Appearance.setColorScheme('light');
         (async () => {
             await setupDatabase(transactionsTableSchema);
             await setupDatabase(tagsTableSchema);
