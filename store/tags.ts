@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getTags } from '@/db/queries';
+
 export interface ITag {
     id: string;
     tagName: string;
@@ -10,19 +11,10 @@ interface ITags {
     data: ITag[];
 }
 
-interface ITagEntry {
-    type: string;
-    payload: ITag;
-}
-
 export const tagsSlice = createSlice({
     name: 'tags',
     initialState: { data: [] } as ITags,
-    reducers: {
-        tagEntry: (state: ITags, action: ITagEntry) => {
-            state.data = [...state.data, action.payload];
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
             loadTags.fulfilled,
@@ -40,5 +32,4 @@ export const loadTags = createAsyncThunk(
     },
 );
 
-export const { tagEntry } = tagsSlice.actions;
 export default tagsSlice.reducer;

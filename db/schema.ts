@@ -18,6 +18,16 @@ export const tagsTableSchema = `
     );
 `;
 
+export const accountsTableSchema = `
+    CREATE TABLE IF NOT EXISTS accounts (
+        value TEXT PRIMARY KEY NOT NULL,
+        label TEXT NOT NULL,
+        type TEXT NOT NULL,
+        balance REAL NOT NULL DEFAULT 0,
+        isDefault TEXT NOT NULL
+    );
+`;
+
 export const getAllTransactionsQuery = 'SELECT * FROM transactions';
 
 export const postTransactionQuery =
@@ -34,3 +44,13 @@ export const postTagQuery =
     'INSERT INTO tags (id, tagName, tagEmoji) VALUES (?, ?, ?)';
 
 export const deleteTagQuery = 'DELETE FROM tags WHERE id = ?';
+
+export const getAllAccountsQuery = 'SELECT * FROM accounts';
+
+export const postAccountQuery =
+    'INSERT INTO accounts (value, label, type, balance, isDefault) VALUES (?, ?, ?, ?, ?)';
+
+export const updateAccountInfoQuery =
+    'UPDATE accounts SET label = ?, balance = ?, isDefault = ? WHERE value = ?';
+
+export const deleteAccountInfoQuery = 'DELETE FROM accounts WHERE value = ?';

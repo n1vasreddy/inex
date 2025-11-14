@@ -2,14 +2,19 @@ import { openDatabase } from './database';
 import { ITransactionInfo } from '@/store/transactions';
 import { ITag } from '@/store/tags';
 import {
+    deleteAccountInfoQuery,
     deleteTagQuery,
     deleteTransactionQuery,
+    getAllAccountsQuery,
     getAllTagsQuery,
     getAllTransactionsQuery,
+    postAccountQuery,
     postTagQuery,
     postTransactionQuery,
+    updateAccountInfoQuery,
     updateTransactionQuery,
 } from './schema';
+import { IAccountInfo } from '@/store/accounts';
 
 export const getTransactions = async (): Promise<ITransactionInfo[]> => {
     try {
@@ -93,6 +98,57 @@ export const deleteTag = async (id: string) => {
         await db.runAsync(deleteTagQuery, [id]);
     } catch (error) {
         console.error('Error deleting tag:', error);
+        return [];
+    }
+};
+
+export const getAccounts = async (): Promise<IAccountInfo[]> => {
+    try {
+        const db = await openDatabase();
+        return await db.getAllAsync(getAllAccountsQuery);
+    } catch (error) {
+        console.error('Error fetching accounts info:', error);
+        return [];
+    }
+};
+
+export const addAccount = async (accountInfo: IAccountInfo) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(postAccountQuery, [
+            accountInfo.value,
+            accountInfo.label,
+            accountInfo.type,
+            accountInfo.balance,
+            accountInfo.isDefault,
+        ]);
+    } catch (error) {
+        console.error('Error adding account:', error);
+        return [];
+    }
+};
+
+export const updateAccountInfo = async (accountInfo: IAccountInfo) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(updateAccountInfoQuery, [
+            accountInfo.label,
+            accountInfo.balance,
+            accountInfo.isDefault,
+            accountInfo.value,
+        ]);
+    } catch (error) {
+        console.error('Error updating account info:', error);
+        return [];
+    }
+};
+
+export const deleteAccountInfo = async (value: string) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(deleteAccountInfoQuery, [value]);
+    } catch (error) {
+        console.error('Error deleting account info:', error);
         return [];
     }
 };

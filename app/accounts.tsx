@@ -1,7 +1,6 @@
 import React from 'react';
+import Accounts from '@/components/profile-setup/Accounts';
 
-const PaymentMethodsScreen = () => {
-    return <></>;
-};
-
-export default PaymentMethodsScreen;
+export default function AccountsScreen() {
+    return <Accounts />;
+}

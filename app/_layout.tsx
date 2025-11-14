@@ -13,8 +13,12 @@ import { AnimatedFAB } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { setupDatabase } from '@/db/database';
-import { useColorScheme } from 'react-native';
-import { tagsTableSchema, transactionsTableSchema } from '@/db/schema';
+import { Appearance, useColorScheme } from 'react-native';
+import {
+    accountsTableSchema,
+    tagsTableSchema,
+    transactionsTableSchema,
+} from '@/db/schema';
 import colors from '@/constants/Colors';
 
 export {
@@ -37,9 +41,11 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
+        Appearance.setColorScheme('light');
         (async () => {
             await setupDatabase(transactionsTableSchema);
             await setupDatabase(tagsTableSchema);
+            await setupDatabase(accountsTableSchema);
         })();
     }, []);
 
@@ -78,36 +84,36 @@ function RootLayoutNav() {
                     <Stack.Screen
                         name="transactionEntry"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Transaction Entry', // Set your modal title here
-                        }}
-                    />
-                    <Stack.Screen
-                        name="balances"
-                        options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Manage Balances', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Transaction Entry',
                         }}
                     />
                     <Stack.Screen
                         name="accounts"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Payment Methods', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Accounts',
+                        }}
+                    />
+                    <Stack.Screen
+                        name="addAccount"
+                        options={{
+                            presentation: 'modal',
+                            title: 'Add Account',
                         }}
                     />
                     <Stack.Screen
                         name="tags"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Manage Categories', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Manage Categories',
                         }}
                     />
                     <Stack.Screen
                         name="newTag"
                         options={{
-                            presentation: 'modal', // This makes it appear as a modal
-                            title: 'Add New Tag', // Set your modal title here
+                            presentation: 'modal',
+                            title: 'Add New Tag',
                         }}
                     />
                 </Stack>
