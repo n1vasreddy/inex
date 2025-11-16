@@ -20,6 +20,7 @@ import {
     transactionsTableSchema,
 } from '@/db/schema';
 import colors from '@/constants/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -41,8 +42,10 @@ export default function RootLayout() {
     });
 
     useEffect(() => {
-        Appearance.setColorScheme('light');
         (async () => {
+            const theme = (await AsyncStorage.getItem('theme')) ?? 'true';
+            if (theme === 'true') Appearance.setColorScheme('light');
+            else Appearance.setColorScheme('dark');
             await setupDatabase(transactionsTableSchema);
             await setupDatabase(tagsTableSchema);
             await setupDatabase(accountsTableSchema);
