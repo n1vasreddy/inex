@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { Appearance, StyleSheet, useColorScheme } from 'react-native';
 import colors from '@/constants/Colors';
 import { labels } from '@/constants/constants';
+import ToggleInput from '@/components/toggle-input/ToggleInput';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MasterSetup = () => {
     const colorScheme = useColorScheme();
+    const [theme, setTheme] = React.useState<boolean>(
+        Appearance.getColorScheme() === 'light',
+    );
+
+    useEffect(() => {
+        if (theme) {
+            Appearance.setColorScheme('light');
+        } else {
+            Appearance.setColorScheme('dark');
+        }
+    }, [theme]);
 
     return (
         <SafeAreaProvider>
@@ -36,6 +49,15 @@ const MasterSetup = () => {
                         {labels.tags}
                     </Text>
                 </Link>
+                <ToggleInput
+                    label={theme ? 'Light' : 'Dark'}
+                    onValueChange={async (theme: boolean) => {
+                        setTheme(theme);
+                        await AsyncStorage.setItem('theme', theme.toString());
+                    }}
+                    value={colorScheme === 'light'}
+                    style={{ margin: 8 }}
+                />
             </SafeAreaView>
         </SafeAreaProvider>
     );
