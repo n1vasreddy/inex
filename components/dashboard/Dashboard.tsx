@@ -1,24 +1,39 @@
-import colors from '@/constants/Colors';
 import React from 'react';
-import { View, StyleSheet, useColorScheme } from 'react-native';
+import { ScrollView, View, StyleSheet, useColorScheme } from 'react-native';
+import colors from '@/constants/Colors';
+import ExpenseTrend from '@/components/dashboard/ExpenseTrend';
+import Balance from './Balance';
 
 const Dashboard = () => {
-    const colorScheme = useColorScheme();
+    const colorScheme = useColorScheme() ?? 'light';
 
     return (
-        <View
-            style={[
-                {
-                    backgroundColor: colors[colorScheme ?? 'light'].background,
-                },
-                styles.container,
-            ]}
-        ></View>
+        <ScrollView>
+            <View
+                style={[
+                    {
+                        backgroundColor:
+                            colors[colorScheme ?? 'light'].background,
+                    },
+                    styles.container,
+                ]}
+            >
+                <Balance />
+                <ExpenseTrend />
+            </View>
+        </ScrollView>
     );
 };
 
 export default Dashboard;
 
 const styles = StyleSheet.create({
-    container: { flex: 1 },
+    container: {
+        flex: 1,
+        margin: 'auto',
+        padding: 10,
+        paddingTop: 20,
+        paddingBottom: 70,
+        gap: 20,
+    },
 });
