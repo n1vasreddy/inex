@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { IAccountInfo } from '@/store/accounts';
 import { formatCurrency } from '@/utils/utils';
 import { RootState, useAppSelector } from '@/store/store';
 import colors from '@/constants/Colors';
+import useAccounts from '@/hooks/useAccounts';
 
 const Balance = () => {
     const colorScheme = useColorScheme() ?? 'light';
     const accounts: IAccountInfo[] = useAppSelector(
         (state: RootState) => state.accounts.data,
     );
+    const { refreshAccounts } = useAccounts();
+
+    useEffect(() => {
+        if (!accounts.length) refreshAccounts();
+    }, []);
 
     const netBalance = accounts.reduce(
         (acc, curr) =>

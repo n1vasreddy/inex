@@ -2,7 +2,7 @@ import { AppDispatch, useAppDispatch } from '@/store/store';
 import { IAccountInfo, loadAccounts } from '@/store/accounts';
 import { addAccount, deleteAccountInfo, updateAccountInfo } from '@/db/queries';
 
-export default function useTransactions() {
+export default function useAccounts() {
     const dispatch: AppDispatch = useAppDispatch();
 
     const refreshAccounts = async () => {
