@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use, useEffect, useMemo } from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { LineChart } from 'react-native-chart-kit';
@@ -6,14 +6,20 @@ import { Dimensions } from 'react-native';
 import { useAppSelector, RootState } from '@/store/store';
 import { ITransactionInfo } from '@/store/transactions';
 import colors from '@/constants/Colors';
+import useTransactions from '@/hooks/useTransactions';
 
 const ExpenseTrend = () => {
     const colorScheme = useColorScheme() ?? 'light';
     const transactions: ITransactionInfo[] = useAppSelector(
         (state: RootState) => state.transactions.data,
     );
+    const { refresh } = useTransactions();
 
-    const getMonthsInYTD = () => {
+    useEffect(() => {
+        if (!transactions.length) refresh();
+    }, []);
+
+    const months: string[] = useMemo(() => {
         const months = [];
         const currentDate = new Date();
         const startDate = new Date(
@@ -30,30 +36,32 @@ const ExpenseTrend = () => {
             );
             const targetMonthString = `${targetMonth.toLocaleString('default', {
                 month: 'short',
-            })}`;
-            // ${targetMonth.getFullYear().toString().slice(-2)}
+            })} ${targetMonth.getFullYear()}`;
             months.push(targetMonthString);
         }
 
         return months;
-    };
+    }, []);
 
-    const months: string[] = getMonthsInYTD();
-
-    const getDebitTransactionsForMonths = () => {
-        const debitTransactionsForMonths = months.map((month) => {
+    const monthsData: number[] = useMemo(() => {
+        const debitTransactionsForMonths = months.map((monthString) => {
+            const [targetMonth, targetYear] = monthString.split(' ');
             const debitTransactionsForMonth = transactions
-                .filter(
-                    (transaction) =>
-                        transaction.trxType === 'debit' &&
-                        new Date(transaction.trxDate).getMonth() ===
-                            month.getMonth(),
-                )
+                .filter((transaction) => {
+                    const transactionDate = new Date(transaction.trxDate);
+                    return (
+                        transaction.trxType === 'false' &&
+                        transactionDate.getFullYear() === Number(targetYear) &&
+                        transactionDate.toLocaleString('default', {
+                            month: 'short',
+                        }) === targetMonth
+                    );
+                })
                 .reduce((sum, transaction) => sum + transaction.amount, 0);
             return debitTransactionsForMonth;
         });
         return debitTransactionsForMonths;
-    };
+    }, [months, transactions]);
 
     return (
         <View style={styles.container}>
@@ -62,14 +70,14 @@ const ExpenseTrend = () => {
             </Text>
             <LineChart
                 data={{
-                    labels: months,
+                    labels: months.map((month: string) => month.split(' ')[0]),
                     datasets: [
                         {
-                            data: getDebitTransactionsForMonths(),
+                            data: monthsData,
                         },
                     ],
                 }}
-                width={Dimensions.get('window').width - 20} // from react-native
+                width={Dimensions.get('window').width - 20}
                 height={350}
                 yAxisLabel="₹"
                 yAxisSuffix="k"
