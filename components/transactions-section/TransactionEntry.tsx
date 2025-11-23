@@ -31,7 +31,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
     const [trxDate, setTrxDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const [category, setCategory] = useState<string[]>([]);
-    const [note, setNote] = useState('');
+    const [note, setNote] = useState('Transaction');
     const { add, update } = useTransactions();
     const { refreshTags } = useTags();
     const { refreshAccounts } = useAccounts();
