@@ -43,6 +43,8 @@ const ExpenseTrend = () => {
         return months;
     }, []);
 
+    let isMonthsDataGTk = false;
+
     const monthsData: number[] = useMemo(() => {
         const debitTransactionsForMonths = months.map((monthString) => {
             const [targetMonth, targetYear] = monthString.split(' ');
@@ -60,7 +62,13 @@ const ExpenseTrend = () => {
                 .reduce((sum, transaction) => sum + transaction.amount, 0);
             return debitTransactionsForMonth;
         });
-        return debitTransactionsForMonths;
+        if (Math.max(...debitTransactionsForMonths) > 1000) {
+            isMonthsDataGTk = true;
+            return debitTransactionsForMonths.map((value) => value / 1000);
+        } else {
+            isMonthsDataGTk = false;
+            return debitTransactionsForMonths;
+        }
     }, [months, transactions]);
 
     return (
@@ -80,7 +88,7 @@ const ExpenseTrend = () => {
                 width={Dimensions.get('window').width - 20}
                 height={350}
                 yAxisLabel="₹"
-                yAxisSuffix="k"
+                yAxisSuffix={isMonthsDataGTk ? 'k' : ''}
                 yAxisInterval={1}
                 chartConfig={{
                     backgroundColor: colors[colorScheme].text,
@@ -92,12 +100,15 @@ const ExpenseTrend = () => {
                     color: (opacity = 0.25) =>
                         `rgba(255, 255, 255, ${opacity})`,
                     labelColor: () => colors.light.text,
+                    propsForLabels: {
+                        fontWeight: 'bold',
+                    },
                     style: {
                         borderRadius: 16,
                     },
                     propsForDots: {
                         r: '2',
-                        strokeWidth: '1',
+                        strokeWidth: '2',
                         stroke: colors[colorScheme].selectedChip,
                     },
                 }}
