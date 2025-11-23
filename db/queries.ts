@@ -12,6 +12,7 @@ import {
     postTagQuery,
     postTransactionQuery,
     updateAccountInfoQuery,
+    updateBalanceQuery,
     updateTransactionQuery,
 } from './schema';
 import { IAccountInfo } from '@/store/accounts';
@@ -139,6 +140,16 @@ export const updateAccountInfo = async (accountInfo: IAccountInfo) => {
         ]);
     } catch (error) {
         console.error('Error updating account info:', error);
+        return [];
+    }
+};
+
+export const updateBalance = async (balance: number, value: string) => {
+    try {
+        const db = await openDatabase();
+        await db.runAsync(updateBalanceQuery, [balance, value]);
+    } catch (error) {
+        console.error('Error updating account balance:', error);
         return [];
     }
 };
