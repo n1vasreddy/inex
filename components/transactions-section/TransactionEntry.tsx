@@ -34,7 +34,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
     const [note, setNote] = useState('Transaction');
     const { add, update } = useTransactions();
     const { refreshTags } = useTags();
-    const { refreshAccounts } = useAccounts();
+    const { refreshAccounts, updateBalance } = useAccounts();
 
     useEffect(() => {
         // Load tags in empty
@@ -75,9 +75,24 @@ export default function TransactionEntry(props: ITransactionInfo) {
             category: category.join(','),
             note,
         };
+        const { balance } = accounts.find(
+            (account) => account.value === paymentMethod,
+        ) || { balance: 0 };
         if (isUpdate) {
+            await updateBalance(
+                paymentMethod,
+                transactionType
+                    ? balance + Number(amount) - props.amount
+                    : balance - Number(amount) + props.amount,
+            );
             await update(payload);
         } else {
+            await updateBalance(
+                paymentMethod,
+                transactionType
+                    ? balance + Number(amount)
+                    : balance - Number(amount),
+            );
             await add(payload);
         }
         navigation.goBack();
