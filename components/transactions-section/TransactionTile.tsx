@@ -8,6 +8,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import useTransactions from '@/hooks/useTransactions';
 import colors from '@/constants/Colors';
+import useAccounts from '@/hooks/useAccounts';
+import { RootState, useAppSelector } from '@/store/store';
 
 export interface ITransactionTileProps extends ITransactionInfo {
     color: string;
@@ -26,14 +28,23 @@ export const TransactionTile = ({
     color,
 }: ITransactionTileProps) => {
     const { remove } = useTransactions();
+    const { updateBalance } = useAccounts();
     const [zIndex, setZIndex] = useState(-1);
-    const colorScheme = useColorScheme();
+    const colorScheme = useColorScheme() ?? 'light';
+    const accounts = useAppSelector((state: RootState) => state.accounts.data);
 
     const handleLongPress = () => {
         setZIndex(1);
     };
 
     const handleDelete = async () => {
+        const { balance } = accounts.find(
+            (account) => account.value === paymentMethod,
+        ) || { balance: 0 };
+        await updateBalance(
+            paymentMethod,
+            trxType === 'true' ? balance - amount : balance + amount,
+        );
         await remove(id);
     };
 
@@ -58,7 +69,8 @@ export const TransactionTile = ({
     };
 
     const tileBackground = {
-        backgroundColor: colors[colorScheme ?? 'light'].tileBackground,
+        backgroundColor: colors[colorScheme].tileBackground,
+        shadowColor: colors[colorScheme].text,
     };
 
     return (
@@ -140,6 +152,13 @@ const transactionTileStyles = StyleSheet.create({
         marginVertical: 10,
         padding: 10,
         borderRightWidth: 2,
+        elevation: 4,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     innerContainer: {
         flexDirection: 'row',
