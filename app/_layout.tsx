@@ -47,8 +47,8 @@ export default function RootLayout() {
             if (theme === 'true') Appearance.setColorScheme('light');
             else Appearance.setColorScheme('dark');
             await setupDatabase(transactionsTableSchema);
-            await setupDatabase(tagsTableSchema);
             await setupDatabase(accountsTableSchema);
+            await setupDatabase(tagsTableSchema);
         })();
     }, []);
 
