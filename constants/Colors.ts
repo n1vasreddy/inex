@@ -23,7 +23,7 @@ const colors = {
         tint: tintColor,
         tabIconDefault,
         tabIconSelected: tintColor,
-        tileBackground: '#05445E',
+        tileBackground: '#3D4A55',
         avatarBackground: '#41729F',
         selectedChip: '#02894B',
         unselectedChip: '#2F5233',

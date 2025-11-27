@@ -27,7 +27,15 @@ const RadioButtonInput = (props: IRadioButtonInputProps) => {
                         key={option.value}
                         style={{ flexDirection: 'row', alignItems: 'center' }}
                     >
-                        <RadioButton value={option.value} />
+                        <RadioButton
+                            value={option.value}
+                            status={
+                                props.value === option.value
+                                    ? 'checked'
+                                    : 'unchecked'
+                            }
+                            disabled={props.disabled}
+                        />
                         <Text>{option.label}</Text>
                     </View>
                 ))}
