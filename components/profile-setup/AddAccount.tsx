@@ -25,6 +25,7 @@ const AddAccount = (props: IAccountInfo) => {
     useEffect(() => {
         if (props?.value) {
             setIsUpdate(true);
+            props?.value && setValue(props.value);
             props?.balance && setBalance(props.balance.toString());
             props?.type && setType(props.type);
             props?.label && setLabel(props.label);
@@ -68,6 +69,7 @@ const AddAccount = (props: IAccountInfo) => {
                     label={labels.value}
                     value={value}
                     onChangeText={(text) => setValue(text)}
+                    disabled={isUpdate}
                 />
 
                 <RadioButtonInput
@@ -75,6 +77,7 @@ const AddAccount = (props: IAccountInfo) => {
                     onValueChange={(value) => setType(value)}
                     value={type}
                     label={labels.accountType}
+                    disabled={isUpdate}
                 />
 
                 <TextInput
