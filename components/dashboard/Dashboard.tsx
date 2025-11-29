@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet, useColorScheme } from 'react-native';
 import colors from '@/constants/Colors';
-// import ExpenseTrend from '@/components/dashboard/ExpenseTrend';
+import ExpenseTrend from '@/components/dashboard/ExpenseTrend';
 import Balance from './Balance';
 
 const Dashboard = () => {
@@ -19,7 +19,7 @@ const Dashboard = () => {
                 ]}
             >
                 <Balance />
-                {/* <ExpenseTrend /> */}
+                <ExpenseTrend />
             </View>
         </ScrollView>
     );
