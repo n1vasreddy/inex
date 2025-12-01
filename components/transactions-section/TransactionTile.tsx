@@ -88,7 +88,9 @@ export const TransactionTile = ({
                         transactionTileStyles.innerContainer,
                     ]}
                 >
-                    <Text style={transactionTileStyles.note}>{note}</Text>
+                    <Text style={transactionTileStyles.note}>
+                        {note} {category && `- ${category}`}
+                    </Text>
                     <Text style={transactionTileStyles.amount}>
                         {formatCurrency(amount)}
                     </Text>
