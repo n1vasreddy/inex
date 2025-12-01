@@ -6,9 +6,10 @@ import { StyledText as Text } from '@/components/styled-text/StyledText';
 import colors from '@/constants/Colors';
 
 interface IChipSelectionInputProps {
-    label: string;
+    label?: string;
     data: ITag[];
     style?: StyleProp<any>;
+    chipsContainerStyles?: StyleProp<any>;
     value?: string[];
     onChange?: (value: string[]) => void;
 }
@@ -27,8 +28,8 @@ const ChipSelectionInput = (props: IChipSelectionInputProps) => {
 
     return (
         <View style={[styles.container, props?.style]}>
-            <Text variant="labelMedium">{props.label}</Text>
-            <View style={styles.innerContainer}>
+            {props?.label && <Text variant="labelMedium">{props.label}</Text>}
+            <View style={[styles.innerContainer, props?.chipsContainerStyles]}>
                 {props?.data.map((chip) => (
                     <Chip
                         key={chip.id}

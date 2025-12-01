@@ -1,22 +1,28 @@
-import React, { use, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
 import { StyledText as Text } from '@/components/styled-text/StyledText';
 import { LineChart } from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
+import ChipSelectionInput from '@/components/chip-input/ChipSelectionInput';
 import { useAppSelector, RootState } from '@/store/store';
 import { ITransactionInfo } from '@/store/transactions';
 import colors from '@/constants/Colors';
 import useTransactions from '@/hooks/useTransactions';
+import useTags from '@/hooks/useTags';
 
 const ExpenseTrend = () => {
     const colorScheme = useColorScheme() ?? 'light';
     const transactions: ITransactionInfo[] = useAppSelector(
         (state: RootState) => state.transactions.data,
     );
+    const tagsData = useAppSelector((state: RootState) => state.tags.data);
     const { refresh } = useTransactions();
+    const { refreshTags } = useTags();
+    const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
         if (!transactions.length) refresh();
+        if (!tagsData.length) refreshTags();
     }, []);
 
     const months: string[] = useMemo(() => {
@@ -45,6 +51,14 @@ const ExpenseTrend = () => {
 
     let isMonthsDataGTk = false;
 
+    const isCategorySelected = (category: string) => {
+        if (tags.length > 0) {
+            return tags.includes(category);
+        } else {
+            return true;
+        }
+    };
+
     const monthsData: number[] = useMemo(() => {
         const debitTransactionsForMonths = months.map((monthString) => {
             const [targetMonth, targetYear] = monthString.split(' ');
@@ -56,7 +70,8 @@ const ExpenseTrend = () => {
                         transactionDate.getFullYear() === Number(targetYear) &&
                         transactionDate.toLocaleString('default', {
                             month: 'short',
-                        }) === targetMonth
+                        }) === targetMonth &&
+                        isCategorySelected(transaction.category)
                     );
                 })
                 .reduce((sum, transaction) => sum + transaction.amount, 0);
@@ -69,13 +84,21 @@ const ExpenseTrend = () => {
             isMonthsDataGTk = false;
             return debitTransactionsForMonths;
         }
-    }, [months, transactions]);
+    }, [months, transactions, tags]);
 
     return (
         <View style={styles.container}>
             <Text variant="titleLarge" style={{ alignSelf: 'center' }}>
                 YTD Expenses
             </Text>
+
+            <ChipSelectionInput
+                data={tagsData}
+                value={tags}
+                onChange={setTags}
+                style={styles.tagsContainer}
+                chipsContainerStyles={styles.chipsContainerStyles}
+            />
             <LineChart
                 data={{
                     labels: months.map((month: string) => month.split(' ')[0]),
@@ -128,5 +151,11 @@ export default ExpenseTrend;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    tagsContainer: {
+        padding: 10,
+    },
+    chipsContainerStyles: {
+        justifyContent: 'space-around',
     },
 });
