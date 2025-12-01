@@ -28,7 +28,8 @@ export const accountsTableSchema = `
     );
 `;
 
-export const getAllTransactionsQuery = 'SELECT * FROM transactions';
+export const getAllTransactionsQuery =
+    'SELECT * FROM transactions ORDER BY trxDate DESC';
 
 export const postTransactionQuery =
     'INSERT INTO transactions (id, amount, trxType, trxDate, paymentMethod, category, note) VALUES (?, ?, ?, ?, ?, ?, ?)';
