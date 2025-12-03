@@ -9,6 +9,7 @@ import { ITransactionInfo } from '@/store/transactions';
 import colors from '@/constants/Colors';
 import useTransactions from '@/hooks/useTransactions';
 import useTags from '@/hooks/useTags';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ExpenseTrend = () => {
     const colorScheme = useColorScheme() ?? 'light';
@@ -23,7 +24,15 @@ const ExpenseTrend = () => {
     useEffect(() => {
         if (!transactions.length) refresh();
         if (!tagsData.length) refreshTags();
+        (async () => {
+            const tags = (await AsyncStorage.getItem('tags')) ?? '[]';
+            setTags(JSON.parse(tags));
+        })();
     }, []);
+
+    useEffect(() => {
+        AsyncStorage.setItem('tags', JSON.stringify(tags));
+    }, [tags]);
 
     const months: string[] = useMemo(() => {
         const months = [];
