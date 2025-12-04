@@ -58,7 +58,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
             props?.amount && setAmount(props.amount.toString());
             props?.trxType &&
                 setTransactionType(props.trxType === 'true' ? true : false);
-            props?.trxDate && setTrxDate(new Date(trxDate));
+            props?.trxDate && setTrxDate(new Date(props.trxDate));
             props?.paymentMethod && setPaymentMethod(props.paymentMethod);
             props?.category && setCategory(props.category.split(','));
             props?.note && setNote(props.note);
@@ -82,8 +82,8 @@ export default function TransactionEntry(props: ITransactionInfo) {
             await updateBalance(
                 paymentMethod,
                 transactionType
-                    ? balance + Number(amount) - props.amount
-                    : balance - Number(amount) + props.amount,
+                    ? balance + Number(amount) - Number(props.amount)
+                    : balance - Number(amount) + Number(props.amount),
             );
             await update(payload);
         } else {
@@ -100,7 +100,7 @@ export default function TransactionEntry(props: ITransactionInfo) {
 
     return (
         <PaperProvider>
-            <View style={transactionEntryStyles.container as any}>
+            <View style={transactionEntryStyles.container}>
                 <TextInputField
                     style={transactionEntryStyles.commonStyles}
                     label={labels.amount}
