@@ -73,6 +73,7 @@ export default function TransactionsSection() {
 const transactionSectionStyles = StyleSheet.create({
     container: {
         alignItems: 'center',
+        paddingBottom: 90,
     },
     item: {
         backgroundColor: '#93DA97',

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         margin: 'auto',
         padding: 10,
         paddingTop: 20,
-        paddingBottom: 70,
+        paddingBottom: 80,
         gap: 20,
     },
 });
